@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".StartGameActivity"></activity>
+        <activity android:name=".StartGameActivity" />
+        <activity android:name=".OptionActivity" />
+        <activity android:name=".StatActivity"></activity>
     </application>
 
 </manifest>

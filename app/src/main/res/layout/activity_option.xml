@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OptionActivity">
+
+    <TextView
+        android:id="@+id/Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:padding="14dp"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="OPTIONS"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/Register">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/difficulty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:padding="14dp"
+                android:shadowDy="2"
+                android:shadowRadius="5"
+                android:text="Difficulty"
+                android:textColorHint="@color/colorPrimary"/>
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginVertical="8dp"
+                android:checkedButton="@+id/mediumRadio"
+                android:orientation="hor">
+
+                <RadioButton
+                    android:id="@+id/easyRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onDifficultyChanged"
+                    android:text="Easy"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/mediumRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onDifficultyChanged"
+                    android:text="Medium"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/hardRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onDifficultyChanged"
+                    android:text="Hard"
+                    android:textSize="18sp" />
+
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:padding="14dp"
+                android:shadowDy="2"
+                android:shadowRadius="5"
+                android:text="User"
+                android:textColorHint="@color/colorPrimary"/>
+
+            <Button
+                android:id="@+id/doneButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="14dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:padding="18dp"
+                android:textSize="18sp"
+                android:text="Sign Out"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

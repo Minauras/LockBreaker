@@ -19,10 +19,11 @@
         android:shadowDy="2"
         android:shadowRadius="5"
         android:text="NEW USER"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:textColorHint="@color/colorPrimary"/>
+        tools:layout_editor_absoluteY="16dp" />
 
     <ScrollView
         android:layout_width="match_parent"
