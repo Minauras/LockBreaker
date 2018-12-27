@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1057306952431",
+    "firebase_url": "https://project-93b12.firebaseio.com",
+    "project_id": "project-93b12",
+    "storage_bucket": "project-93b12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057306952431:android:f6297d19a5fa6e7e",
+        "android_client_info": {
+          "package_name": "com.fontbonne.ley.clerc.lockbreaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057306952431-tcbnvsatu9rk9d19dkvr1b3v0m6lic1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fontbonne.ley.clerc.lockbreaker",
+            "certificate_hash": "0776373e49c20adc5f37f39e881d6f751e39e583"
+          }
+        },
+        {
+          "client_id": "1057306952431-6t3ctsau3kp1e26unk27gq1uchtoch58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBuLEFrGyYNO03ZlLHeNJmcCQSPi8Y34o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057306952431-6t3ctsau3kp1e26unk27gq1uchtoch58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
