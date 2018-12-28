@@ -20,7 +20,12 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StartGameActivity" />
         <activity android:name=".OptionActivity" />
-        <activity android:name=".StatActivity"></activity>
+        <activity android:name=".StatActivity" />
+        <activity
+            android:name=".MisleadingColorsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_misleading_colors"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

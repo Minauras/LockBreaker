@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Lock Breaker</string>
+
+    <string name="title_activity_misleading_colors">MisleadingColorsActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

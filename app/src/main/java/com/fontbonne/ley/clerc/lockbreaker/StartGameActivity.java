@@ -3,10 +3,12 @@ package com.fontbonne.ley.clerc.lockbreaker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class StartGameActivity extends AppCompatActivity implements View.OnClickListener {
+public class StartGameActivity extends AppCompatActivity {
 
     private Button mStartButton;
     private Button mOptionButton;
@@ -16,23 +18,35 @@ public class StartGameActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
-    }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.playButton:
-                // Play Game
-                break;
-            case R.id.statButton:
-                Intent statIntent = new Intent(StartGameActivity.this, StatActivity.class);
+        mStartButton = findViewById(R.id.playButton);
+        mOptionButton = findViewById(R.id.optionButton);
+        mStatButton = findViewById(R.id.statButton);
+
+        mStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(StartGameActivity.this, "START", Toast.LENGTH_LONG).show();
+
+                MisleadingColorsActivity activity1 = new MisleadingColorsActivity();
+                activity1.startGame(StartGameActivity.this);
+            }
+        });
+
+        mOptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent statIntent = new Intent(StartGameActivity.this, OptionActivity.class);
                 startActivity(statIntent);
-                break;
-            case R.id.optionButton:
-                Intent optionIntent = new Intent(StartGameActivity.this, OptionActivity.class);
+            }
+        });
+
+        mStatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent optionIntent = new Intent(StartGameActivity.this, StatActivity.class);
                 startActivity(optionIntent);
-                break;
-        }
+            }
+        });
     }
 }
