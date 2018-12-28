@@ -3,8 +3,8 @@ package com.fontbonne.ley.clerc.lockbreaker;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,12 +12,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.widget.Button;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class MisleadingColorsActivity extends MiniGame {
+public class MisleadingColorsActivity extends MiniGame implements Parcelable {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -37,6 +43,7 @@ public class MisleadingColorsActivity extends MiniGame {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    Button dummyButton;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -88,11 +95,31 @@ public class MisleadingColorsActivity extends MiniGame {
         }
     };
 
+    public MisleadingColorsActivity(List<Class> gameActivity) {
+        super(gameActivity);
+    }
+    public MisleadingColorsActivity() {
+        super();
+    }
+
     @Override
     protected void startGame(Context context){
         Intent intent = new Intent(context, MisleadingColorsActivity.class);
-        Log.e("TAG", String.valueOf(intent));
+        Bundle bundle = new Bundle();
+        MiniGame temp = this.copy();
+        bundle.putParcelable("data", temp);
+        intent.putExtras(bundle);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void findNext(){
+        if(games.contains(MisleadingColorsActivity.class)){
+            int ind = games.indexOf(MisleadingColorsActivity.class);
+            nextGame = games.get(ind + 1);
+        }else {
+            Log.e("TAG_Patrick", "ERROR: not in games list");
+        }
     }
 
     @Override
@@ -121,7 +148,41 @@ public class MisleadingColorsActivity extends MiniGame {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        Log.e("TAG_Patrick", "Bf Button");
+
+        Bundle bundle = getIntent().getExtras();
+        MiniGame game = new MiniGame();
+        game = bundle.getParcelable("data");
+
+        games = game.games;
+        totalScore = game.totalScore;
+
+        dummyButton = findViewById(R.id.dummy_button);
+        dummyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findNext();
+                Log.e("TAG_Patrick", String.valueOf(nextGame));
+                Constructor<?> thingyconstructor = null;
+                Object thingyobj = null;
+                Method thingymethod = null;
+                try {
+                    thingyconstructor = nextGame.getConstructor();
+                    thingyobj = thingyconstructor.newInstance();
+                    thingymethod = thingyobj.getClass().getDeclaredMethod("startGame", Context.class);
+                    thingymethod.invoke(thingyobj, MisleadingColorsActivity.this);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

@@ -57,6 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterButton = (Button) findViewById(R.id.registerBtn);
         mLoginButton =(Button) findViewById(R.id.loginBtn);
 
+        // TEMPORARY for quick pass through --------------------------------------------------------
+        mEmailEditText.setText("test@test.com");
+        mPasswordEditText.setText("password");
+        // TEMPORARY -------------------------------------------------------------------------------
+
         // Register Button Callback ----------------------------------------------------------------
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,7 +25,15 @@
             android:name=".MisleadingColorsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_misleading_colors"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".SimilarQuizActivity"
+            android:label="@string/title_activity_similar_quiz"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FinalScreenActivity"
+            android:label="@string/title_activity_final_screen"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
