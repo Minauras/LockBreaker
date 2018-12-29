@@ -34,7 +34,7 @@
             android:typeface="normal" />
 
         <TextView
-            android:id="@+id/jugmentTextView"
+            android:id="@+id/messageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -51,19 +51,23 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/menuButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
-                android:text="Menu"/>
+                android:text="Menu"
+                android:onClick="goToMenu"/>
 
             <Button
+                android:id="@+id/playAgainButton"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_important_background"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Play Again"/>
+                android:text="Play Again"
+                android:onClick="playAgain"/>
 
         </LinearLayout>
 

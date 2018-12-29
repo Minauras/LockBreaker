@@ -23,6 +23,7 @@ public class StartGameActivity extends MiniGame{
     private Button mStartButton;
     private Button mOptionButton;
     private Button mStatButton;
+
     private static int NBRMINIGAMES = 2;
     private int nbrGames = 2;
 
