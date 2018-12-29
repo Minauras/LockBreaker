@@ -68,9 +68,9 @@
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
                 android:padding="18dp"
-                android:text="Register"
-                android:textColor="@color/colorAccent" />
+                android:text="Register" />
 
             <Button
                 android:id="@+id/loginBtn"
