@@ -10,42 +10,19 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class SimilarQuizActivity extends MiniGame {
 
     public SimilarQuizActivity(List<Class> gameActivity) {
         super(gameActivity);
-        if(games.contains(SimilarQuizActivity.class)){
-            int ind = games.indexOf(SimilarQuizActivity.class);
-            nextGame = games.get(ind + 1);
-        }else {
-            Log.e("TAG_Patrick", "ERROR: not in games list");
-        }
     }
 
     public SimilarQuizActivity(){
         super();
-    }
-
-    @Override
-    protected void startGame(Context context){
-        Intent intent = new Intent(context, SimilarQuizActivity.class);
-        Bundle bundle = new Bundle();
-        Log.e("TAG_Patrick", String.valueOf(this));
-        bundle.putParcelable("data", this);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
-
-    @Override
-    protected void findNext(){
-        if(games.contains(SimilarQuizActivity.class)){
-            int ind = games.indexOf(SimilarQuizActivity.class);
-            nextGame = games.get(ind + 1);
-        }else {
-            Log.e("TAG_Patrick", "ERROR: not in games list");
-        }
     }
 
     @Override
@@ -55,12 +32,13 @@ public class SimilarQuizActivity extends MiniGame {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        receiveLastGameData();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setScore(10);
-                updateScore();
+                initializeNextGame();
             }
         });
     }

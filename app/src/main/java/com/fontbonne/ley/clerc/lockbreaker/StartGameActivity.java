@@ -13,13 +13,25 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
-public class StartGameActivity extends AppCompatActivity{
+public class StartGameActivity extends MiniGame{
 
     private Button mStartButton;
     private Button mOptionButton;
     private Button mStatButton;
+    private static int NBRMINIGAMES = 2;
+    private int nbrGames = 2;
+
+    public StartGameActivity(List<Class> gameActivity) {
+        super(gameActivity);
+    }
+    public StartGameActivity() {
+        super();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +48,7 @@ public class StartGameActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(StartGameActivity.this, "START", Toast.LENGTH_LONG).show();
-
-                Log.e("TAG_Patrick", "Bf games declaration");
-                List<Class> games = new ArrayList<Class>();
-                games.add(SimilarQuizActivity.class);
-                games.add(MisleadingColorsActivity.class);
-                games.add(FinalScreenActivity.class);
-
-                Constructor<?> thingyconstructor = null;
-                Object thingyobj = null;
-                Method thingymethod = null;
-                try {
-                    thingyconstructor = games.get(0).getConstructor();
-                    thingyobj = thingyconstructor.newInstance();
-                    thingymethod = thingyobj.getClass().getDeclaredMethod("startGame", Context.class);
-                    thingymethod.invoke(thingyobj, StartGameActivity.this);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                Log.e("TAG_Patrick", "Finished Misleading Declaration");
+                initializeNextGame();
             }
         });
 
@@ -82,6 +70,20 @@ public class StartGameActivity extends AppCompatActivity{
     }
 
     private void setupGame() {
+        // Add all minigames here to games
+        games.add(SimilarQuizActivity.class);
+        games.add(MisleadingColorsActivity.class);
 
+        // Randomize the list of games
+        Collections.shuffle(Arrays.asList(games));
+
+        // make games be the size of nbrGames
+        if(nbrGames < NBRMINIGAMES)
+            for(int i = 0; i<(NBRMINIGAMES-nbrGames);i++)
+                games.remove(games.size() - 1);
+
+        // Add starting screen and final screen
+        games.add(0,StartGameActivity.class);
+        games.add(FinalScreenActivity.class);
     }
 }

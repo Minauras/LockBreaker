@@ -103,26 +103,6 @@ public class MisleadingColorsActivity extends MiniGame implements Parcelable {
     }
 
     @Override
-    protected void startGame(Context context){
-        Intent intent = new Intent(context, MisleadingColorsActivity.class);
-        Bundle bundle = new Bundle();
-        MiniGame temp = this.copy();
-        bundle.putParcelable("data", temp);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
-
-    @Override
-    protected void findNext(){
-        if(games.contains(MisleadingColorsActivity.class)){
-            int ind = games.indexOf(MisleadingColorsActivity.class);
-            nextGame = games.get(ind + 1);
-        }else {
-            Log.e("TAG_Patrick", "ERROR: not in games list");
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -151,36 +131,13 @@ public class MisleadingColorsActivity extends MiniGame implements Parcelable {
 
         Log.e("TAG_Patrick", "Bf Button");
 
-        Bundle bundle = getIntent().getExtras();
-        MiniGame game = new MiniGame();
-        game = bundle.getParcelable("data");
-
-        games = game.games;
-        totalScore = game.totalScore;
+        receiveLastGameData();
 
         dummyButton = findViewById(R.id.dummy_button);
         dummyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findNext();
-                Log.e("TAG_Patrick", String.valueOf(nextGame));
-                Constructor<?> thingyconstructor = null;
-                Object thingyobj = null;
-                Method thingymethod = null;
-                try {
-                    thingyconstructor = nextGame.getConstructor();
-                    thingyobj = thingyconstructor.newInstance();
-                    thingymethod = thingyobj.getClass().getDeclaredMethod("startGame", Context.class);
-                    thingymethod.invoke(thingyobj, MisleadingColorsActivity.this);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
+                initializeNextGame();
             }
         });
     }

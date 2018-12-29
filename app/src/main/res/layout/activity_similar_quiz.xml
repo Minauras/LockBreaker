@@ -20,7 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_similar_quiz" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_similar_quiz" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -29,5 +31,15 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Similar Quizzz"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="left|center" />
 
 </android.support.design.widget.CoordinatorLayout>
