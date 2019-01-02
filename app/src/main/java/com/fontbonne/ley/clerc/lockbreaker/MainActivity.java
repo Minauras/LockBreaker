@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
                             new Pair[]{create(mLogo, "logoTransition"),  create(mScreen, "screenTransition")});
 
+                    sendStart(v);
                     startActivity(toLogin, options.toBundle());
                 } else {
                     startActivity(toLogin);
@@ -41,5 +42,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Start the WearOS ----------------------------------------------------------------------------
+
+    public void sendStart(View view) {
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.STARTACTIVITY.name());
+        intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_mainactivity);
+        startService(intent);
     }
 }

@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -77,7 +78,24 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         }
     }
 
-    // Methods used in initializeNextGame ----------------------------------------------------
+    // Methods to use to communicate with the WearOS------------------------------------------------
+
+    public void sendStart(View view) {
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.STARTACTIVITY.name());
+        intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_mainactivity);
+        startService(intent);
+    }
+
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.MESSAGE.name());
+        intent.putExtra(WearService.MESSAGE, "Messaging other device!");
+        intent.putExtra(WearService.PATH, BuildConfig.W_example_path_text);
+        startService(intent);
+    }
+
+    // Methods used in initializeNextGame ----------------------------------------------------------
     protected void startGame(Context context){
         Intent intent = new Intent(context, this.getClass());
         Bundle bundle = new Bundle();

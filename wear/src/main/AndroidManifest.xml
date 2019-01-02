@@ -2,40 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fontbonne.ley.clerc.lockbreaker">
 
+    <uses-feature android:name="android.hardware.type.watch" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@android:style/Theme.DeviceDefault">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true" />
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".StartGameActivity" />
-        <activity android:name=".OptionActivity" />
-        <activity android:name=".StatActivity" />
-        <activity
-            android:name=".MisleadingColorsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_misleading_colors"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".SimilarQuizActivity"
-            android:label="@string/title_activity_similar_quiz"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".FinalScreenActivity"
-            android:label="@string/title_activity_final_screen"
-            android:theme="@style/AppTheme" />
 
         <service android:name=".WearService">
             <intent-filter>
