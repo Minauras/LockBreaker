@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".MisleadingColorsActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -19,22 +20,21 @@
 
         <TextView
             android:id="@+id/titleTextViewl"
-            android:layout_width="15dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="1.1"
             android:text="Misleading "
             android:textAlignment="textEnd"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="36sp" />
+            android:textSize="33sp" />
 
         <TextView
             android:id="@+id/titleTextViewr"
-            android:layout_width="15dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="1"
             android:text=" Colors"
             android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:textSize="33sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,18 +45,18 @@
 
         <TextView
             android:id="@+id/QuestionTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.01"
+            android:layout_weight="1"
             android:text="Which color is "
             android:textAlignment="center"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/QuestionColorView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="1"
             android:text="COLOR"
             android:textSize="24sp" />
     </LinearLayout>
@@ -64,40 +64,48 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.6">
+        android:layout_weight="1">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="5dp">
 
             <Button
                 android:id="@+id/btnTopLeft"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/btnTopRight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="5dp">
 
             <Button
                 android:id="@+id/btnBotLeft"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
 
             <Button
                 android:id="@+id/btnBotRight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"/>
         </TableRow>
 
     </TableLayout>
