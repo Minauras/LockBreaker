@@ -31,10 +31,10 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected int score;
 
     // Constructor ---------------------------------------------------------------------------------
-    public MiniGame(List<Class> gameList) {
+    public MiniGame(List<Class> gameList, int TotScore) {
         games = gameList;
         nextGame = null;
-        totalScore = 10;
+        totalScore = TotScore;
         score = 0;
     }
 
@@ -54,13 +54,15 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
 
     // Call this method to pass to next mini-game --------------------------------------------------
     protected void initializeNextGame(){
+        updateScore();
         findNext();
-        Constructor<?> nextGameConstructor = null;
+        Constructor<?>[] nextGameConstructor = null;
         Object nextGameObj = null;
         Method nextGameMethod = null;
+        Log.e("TAG_PAT", "totalScore" + totalScore);
         try {
-            nextGameConstructor = nextGame.getConstructor(List.class);
-            nextGameObj = nextGameConstructor.newInstance(new Object[] { games });
+            nextGameConstructor = nextGame.getConstructors();
+            nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore });
             nextGameMethod = nextGameObj.getClass().getMethod("startGame", Context.class);
             nextGameMethod.invoke(nextGameObj, getApplicationContext());
         } catch (IllegalAccessException e) {
@@ -99,8 +101,8 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected void startGame(Context context){
         Intent intent = new Intent(context, this.getClass());
         Bundle bundle = new Bundle();
-        Log.e("TAG_Patrick", String.valueOf(this));
         bundle.putParcelable("data", this);
+        Log.e("TAG_Patrick", String.valueOf(bundle));
         intent.putExtras(bundle);
         context.startActivity(intent);
     };
@@ -155,7 +157,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     // Getter and Setters --------------------------------------------------------------------------
     protected List<Class> getGames(){return games;}
 
-    protected void setScore(int s){score = s;} //only temporary
+    protected void addtoScore(int s){score += s;} //only temporary
 
     protected void updateScore() {
         totalScore = score + totalScore;

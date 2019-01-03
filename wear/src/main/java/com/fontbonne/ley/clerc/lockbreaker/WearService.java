@@ -164,14 +164,12 @@ public class WearService extends WearableListenerService {
                         break;
                     case BuildConfig.W_example_path_datamap:
                         // Extract the data behind the key you know contains data
-                        int integer = dataMapItem.getDataMap().getInt(BuildConfig.W_a_key);
+                        Log.e("TAG_PAT", "putting DATAMAP stuff");
                         ArrayList<Integer> arraylist = dataMapItem.getDataMap().getIntegerArrayList(BuildConfig.W_some_other_key);
-                        for (Integer i : arraylist)
-                            Log.i(TAG, "Got integer " + i + " from array list");
-                        intent = new Intent("REPLACE_THIS_WITH_A_STRING_OF_ANOTHER_ACTION_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY");
-                        intent.putExtra("REPLACE_THIS_WITH_A_STRING_OF_INTEGER_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY", integer);
-                        intent.putExtra("REPLACE_THIS_WITH_A_STRING_OF_ARRAYLIST_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY", arraylist);
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                        intent = new Intent(this, MisleadingColors.class);
+                        intent.putExtra(MisleadingColors.MISLEADINGCOLORS_ARRAYLIST, arraylist);
+                        startActivity(intent);
+                        //LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                         break;
                     default:
                         Log.v(TAG, "Data changed for unhandled path: " + uri);
@@ -227,7 +225,6 @@ public class WearService extends WearableListenerService {
                 Collections.addAll(arrayList, 5, 7, 9, 10);
                 //Intent intent = new Intent(MainActivity.STARTACTIVITY);
                 //LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
-
                 PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(BuildConfig.W_example_path_datamap);
                 putDataMapRequest.getDataMap().putInt(BuildConfig.W_a_key, 42);
                 putDataMapRequest.getDataMap().putIntegerArrayList(BuildConfig.W_some_other_key, arrayList);

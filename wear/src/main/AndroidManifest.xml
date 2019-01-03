@@ -51,6 +51,16 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".MisleadingColors"
+            android:label="@string/title_activity_misleading_colors">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

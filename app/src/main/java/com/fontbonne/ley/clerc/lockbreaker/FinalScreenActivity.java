@@ -34,7 +34,7 @@ public class FinalScreenActivity extends MiniGame {
     private Button mPlayAgainButton;
 
 
-    public FinalScreenActivity(List<Class> gameActivity) { super(gameActivity); }
+    public FinalScreenActivity(List<Class> gameActivity, int totscore) { super(gameActivity, totscore); }
 
     public FinalScreenActivity(){ super(); }
 
@@ -52,11 +52,12 @@ public class FinalScreenActivity extends MiniGame {
         mMenuButton = (Button) findViewById(R.id.menuButton);
         mPlayAgainButton = (Button) findViewById(R.id.playAgainButton);
 
+        receiveLastGameData();
 
         String message;
-        totalScore = 19;
+        //totalScore = 19;
 
-        Log.d("NICOLAS", "HEY Here " + totalScore);
+        Log.e("NICOLAS", "HEY Here " + totalScore);
 
 
         if (totalScore > 50){

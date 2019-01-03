@@ -17,8 +17,8 @@ import java.util.List;
 
 public class SimilarQuizActivity extends MiniGame {
 
-    public SimilarQuizActivity(List<Class> gameActivity) {
-        super(gameActivity);
+    public SimilarQuizActivity(List<Class> gameActivity, int totscore) {
+        super(gameActivity, totscore);
     }
 
     public SimilarQuizActivity(){
