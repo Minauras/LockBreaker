@@ -162,10 +162,10 @@ public class WearService extends WearableListenerService {
                         intent = new Intent("REPLACE_THIS_WITH_A_STRING_OF_ACTION_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY");
                         bitmapFromAsset(asset, intent, "REPLACE_THIS_WITH_A_STRING_OF_IMAGE_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY");
                         break;
-                    case BuildConfig.W_example_path_datamap:
+                    case BuildConfig.W_misleading_colors:
                         // Extract the data behind the key you know contains data
                         Log.e("TAG_PAT", "putting DATAMAP stuff");
-                        ArrayList<Integer> arraylist = dataMapItem.getDataMap().getIntegerArrayList(BuildConfig.W_some_other_key);
+                        ArrayList<Integer> arraylist = dataMapItem.getDataMap().getIntegerArrayList(BuildConfig.W_misleading_colors_array);
                         intent = new Intent(this, MisleadingColors.class);
                         intent.putExtra(MisleadingColors.MISLEADINGCOLORS_ARRAYLIST, arraylist);
                         startActivity(intent);
@@ -219,7 +219,7 @@ public class WearService extends WearableListenerService {
             case BuildConfig.W_path_acknowledge:
                 Log.v(TAG, "Received acknowledgment");
                 break;
-            case BuildConfig.W_example_path_text:
+            case BuildConfig.W_misleading_colors:
                 Log.e(TAG, "Message contained text. Return a datamap for demo purpose");
                 ArrayList<Integer> arrayList = new ArrayList<>();
                 Collections.addAll(arrayList, 5, 7, 9, 10);
@@ -230,6 +230,10 @@ public class WearService extends WearableListenerService {
                 putDataMapRequest.getDataMap().putIntegerArrayList(BuildConfig.W_some_other_key, arrayList);
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
+            case BuildConfig.W_space_word_answer:
+                Intent intent = new Intent(this, SpaceWord.class);
+                intent.putExtra(SpaceWord.ANSWER, data);
+                startActivity(intent);
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,23 +31,22 @@ public class MisleadingColorsActivity extends MiniGame {
         super();
     }
 
-    Button btnTL;
-    Button btnTR;
-    Button btnBL;
-    Button btnBR;
+    private Button btnTL;
+    private Button btnTR;
+    private Button btnBL;
+    private Button btnBR;
 
-    TextView qstLeft;
-    TextView qstRight;
+    private TextView qstLeft;
+    private TextView qstRight;
 
     private COLOR[] colorOFtext;
     private COLOR[] colorOfcolor;
     private COLOR[] colorOFbtn;
 
-    int answer;
-    COLOR answerColor;
+    private int answer;
+    private COLOR answerColor;
 
-    int nbrGamesPlayed;
-
+    private int nbrGamesPlayed;
     private boolean gamemode;
 
     @Override
@@ -73,10 +73,15 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 0) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(100);
                 }
-                else
+                else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
                 else initializeNextGame();
@@ -88,10 +93,15 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 1) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(100);
                 }
-                else
+                else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
+                    Toast.makeText(MisleadingColorsActivity.this,
+                        "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
                 else initializeNextGame();
@@ -103,10 +113,15 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 2){
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(100);
                 }
-                else
+                else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
                 else initializeNextGame();
@@ -118,10 +133,15 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 3) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(100);
                 }
-                else
+                else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
+                    Toast.makeText(MisleadingColorsActivity.this,
+                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
                 else initializeNextGame();

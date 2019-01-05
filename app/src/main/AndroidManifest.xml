@@ -55,6 +55,11 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".SpaceWordActivity"
+            android:label="@string/title_activity_space_word"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

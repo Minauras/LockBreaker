@@ -71,9 +71,14 @@ public class WearService extends WearableListenerService {
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
             case MISLEADINGCOLORS:
-                putDataMapRequest = PutDataMapRequest.create(BuildConfig.W_example_path_datamap);
-                putDataMapRequest.getDataMap().putIntegerArrayList(BuildConfig.W_some_other_key, intent.getIntegerArrayListExtra(DATAMAP_COLOR_ARRAYLIST));
+                putDataMapRequest = PutDataMapRequest.create(BuildConfig.W_misleading_colors);
+                putDataMapRequest.getDataMap().putIntegerArrayList(BuildConfig.W_misleading_colors_array, intent.getIntegerArrayListExtra(DATAMAP_COLOR_ARRAYLIST));
                 sendPutDataMapRequest(putDataMapRequest);
+                break;
+            case SPACEWORD:
+                message = intent.getStringExtra(MESSAGE);
+                if (message == null) message = "";
+                sendMessage(message, intent.getStringExtra(PATH));
                 break;
             default:
                 Log.w(TAG, "Unknown action");
@@ -334,6 +339,6 @@ public class WearService extends WearableListenerService {
 
     // Constants
     public enum ACTION_SEND {
-        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS
+        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD
     }
 }
