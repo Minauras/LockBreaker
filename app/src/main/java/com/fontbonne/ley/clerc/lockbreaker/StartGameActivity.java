@@ -1,22 +1,13 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class StartGameActivity extends MiniGame{
 
@@ -24,8 +15,8 @@ public class StartGameActivity extends MiniGame{
     private Button mOptionButton;
     private Button mStatButton;
 
-    private static int NBRMINIGAMES = 3;
-    private int nbrGames = 3;
+    private static int NBRMINIGAMES = 4;
+    private int nbrGames = 4;
 
     public StartGameActivity(List<Class> gameActivity, int totscore) {
         super(gameActivity, totscore);
@@ -75,6 +66,7 @@ public class StartGameActivity extends MiniGame{
         games.add(SimilarQuizActivity.class);
         games.add(MisleadingColorsActivity.class);
         games.add(SpaceWordActivity.class);
+        games.add(PerilousJourneyActivity.class);
 
         // Randomize the list of games
         Collections.shuffle(games);

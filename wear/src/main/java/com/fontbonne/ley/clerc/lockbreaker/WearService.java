@@ -70,6 +70,11 @@ public class WearService extends WearableListenerService {
                 putDataMapRequest.getDataMap().putAsset(BuildConfig.W_some_other_key, (Asset) intent.getParcelableExtra(IMAGE));
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
+            case LUX:
+                putDataMapRequest = PutDataMapRequest.create(intent.getStringExtra(PATH));
+                putDataMapRequest.getDataMap().putFloat(BuildConfig.W_lux_value, intent.getFloatExtra(LUX, 1000));
+                sendPutDataMapRequest(putDataMapRequest);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -85,6 +90,7 @@ public class WearService extends WearableListenerService {
     public static final String DATAMAP_INT_ARRAYLIST = "DATAMAP_INT_ARRAYLIST";
     public static final String IMAGE = "IMAGE";
     public static final String PATH = "PATH";
+    public static final String LUX = "LUX";
 
     public static Asset createAssetFromBitmap(Bitmap bitmap) {
         bitmap = resizeImage(bitmap, 390);
@@ -231,9 +237,14 @@ public class WearService extends WearableListenerService {
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
             case BuildConfig.W_space_word_answer:
-                Intent intent = new Intent(this, SpaceWord.class);
-                intent.putExtra(SpaceWord.ANSWER, data);
-                startActivity(intent);
+                Intent intent_space_word = new Intent(this, SpaceWord.class);
+                intent_space_word.putExtra(SpaceWord.ANSWER, data);
+                startActivity(intent_space_word);
+                break;
+            case BuildConfig.W_perilous_journey:
+                Intent intent_perilous_journey = new Intent(this, PerilousJourney.class);
+                startActivity(intent_perilous_journey);
+                break;
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }
@@ -329,6 +340,6 @@ public class WearService extends WearableListenerService {
 
     // Constants
     public enum ACTION_SEND {
-        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET
+        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, LUX
     }
 }

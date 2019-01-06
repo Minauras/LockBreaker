@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.fontbonne.ley.clerc.lockbreaker.BuildConfig;
-import com.fontbonne.ley.clerc.lockbreaker.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -79,6 +77,9 @@ public class WearService extends WearableListenerService {
                 message = intent.getStringExtra(MESSAGE);
                 if (message == null) message = "";
                 sendMessage(message, intent.getStringExtra(PATH));
+                break;
+            case PERILOUSJOURNEY:
+                sendMessage("Start Activity", BuildConfig.W_perilous_journey);
                 break;
             default:
                 Log.w(TAG, "Unknown action");
@@ -183,6 +184,12 @@ public class WearService extends WearableListenerService {
                         intent.putExtra("REPLACE_THIS_WITH_A_STRING_OF_INTEGER_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY", integer);
                         intent.putExtra("REPLACE_THIS_WITH_A_STRING_OF_ARRAYLIST_PREFERABLY_DEFINED_AS_A_CONSTANT_IN_TARGET_ACTIVITY", arraylist);
                         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                        break;
+                    case BuildConfig.W_lux:
+                        float lux_value = dataMapItem.getDataMap().getFloat(BuildConfig.W_lux_value);
+                        intent = new Intent(PerilousJourneyActivity.SENDINGLUXVALUE);
+                        intent.putExtra(PerilousJourneyActivity.LUXVALUE, lux_value);
+                        LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
                         break;
                     default:
                         Log.v(TAG, "Data changed for unhandled path: " + uri);
@@ -339,6 +346,7 @@ public class WearService extends WearableListenerService {
 
     // Constants
     public enum ACTION_SEND {
-        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD
+        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
+        PERILOUSJOURNEY
     }
 }

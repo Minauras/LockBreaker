@@ -1,0 +1,19 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/empty" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying00" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying01" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying02" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying03" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying04" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying05" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying06" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying07" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying08" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying09" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying10" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying11" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying12" android:duration="80" />
+    <item android:drawable="@drawable/dragonlongerflying13" android:duration="80" />
+    <item android:drawable="@drawable/empty" android:duration="80" />
+</animation-list>

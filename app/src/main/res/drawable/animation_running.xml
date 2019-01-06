@@ -1,0 +1,10 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/runningman0" android:duration="60" />
+    <item android:drawable="@drawable/runningman1" android:duration="60" />
+    <item android:drawable="@drawable/runningman2" android:duration="60" />
+    <item android:drawable="@drawable/runningman3" android:duration="60" />
+    <item android:drawable="@drawable/runningman4" android:duration="60" />
+    <item android:drawable="@drawable/runningman5" android:duration="60" />
+    <item android:drawable="@drawable/runningman6" android:duration="60" />
+</animation-list>
