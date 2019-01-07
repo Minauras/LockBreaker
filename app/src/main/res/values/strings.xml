@@ -9,4 +9,6 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_space_word">SpaceWordActivity</string>
+    <string name="symbols">ϘӬ©бΨѦѼ¶ƛϿҨѢ҂ϞҖѬϾæ☆Ԇϗ¿ѮҊ★Ω</string>
+    <string name="title_activity_symbols">SymbolsActivity</string>
 </resources>

@@ -61,7 +61,12 @@
             android:label="@string/title_activity_space_word"
             android:theme="@style/AppTheme" />
         <activity android:name=".PerilousJourneyActivity" />
-        <activity android:name=".StepByStepActivity"></activity>
+        <activity android:name=".StepByStepActivity" />
+        <activity
+            android:name=".SymbolsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_symbols"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
