@@ -89,6 +89,9 @@ public class WearService extends WearableListenerService {
                 putDataMapRequest.getDataMap().putInt(BuildConfig.W_step_count, intent.getIntExtra(STEPCOUNT, 0));
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
+            case SYMBOLS:
+                sendMessage(intent.getStringExtra(DATAMAP_SYMBOL_ARRAYLIST), BuildConfig.W_symbols_key);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -101,6 +104,7 @@ public class WearService extends WearableListenerService {
 
     public static final String MESSAGE = "MESSAGE";
     public static final String STEPCOUNT = "STEPCOUNT";
+    public static final String DATAMAP_SYMBOL_ARRAYLIST = "DATAMAP_SYMBOL_ARRAYLIST";
     public static final String DATAMAP_INT = "DATAMAP_INT";
     public static final String DATAMAP_INT_ARRAYLIST = "DATAMAP_INT_ARRAYLIST";
     public static final String DATAMAP_COLOR_ARRAYLIST = "DATAMAP_COLOR_ARRAYLIST";
@@ -362,6 +366,6 @@ public class WearService extends WearableListenerService {
     // Constants
     public enum ACTION_SEND {
         STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
-        PERILOUSJOURNEY, STEP, STEPBYSTEP
+        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS
     }
 }

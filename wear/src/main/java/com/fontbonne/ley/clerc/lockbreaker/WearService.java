@@ -261,6 +261,11 @@ public class WearService extends WearableListenerService {
                 Intent intent_step_by_step = new Intent(this, StepByStep.class);
                 startActivity(intent_step_by_step);
                 break;
+            case BuildConfig.W_symbols_key:
+                Intent intent_symbols = new Intent(this, SymbolsActivity.class);
+                intent_symbols.putExtra(SymbolsActivity.START_SYMBOLS, data);
+                startActivity(intent_symbols);
+                break;
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }

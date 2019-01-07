@@ -1,163 +1,151 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
-public class SymbolsActivity extends AppCompatActivity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+public class SymbolsActivity extends MiniGame {
 
-    /**
-     * Some older devices needs a small delay between UI widget updates
-     * and a change of the status and navigation bar.
-     */
-    private static final int UI_ANIMATION_DELAY = 300;
-    private final Handler mHideHandler = new Handler();
-    private View mContentView;
-    private final Runnable mHidePart2Runnable = new Runnable() {
-        @SuppressLint("InlinedApi")
-        @Override
-        public void run() {
-            // Delayed removal of status and navigation bar
+    private ArrayList<Character> symbols = new ArrayList<Character>();
+    private ArrayList<Integer> solution = new ArrayList<Integer>();
+    private ArrayList<Character> solution_symbol = new ArrayList<Character>();
 
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        }
-    };
-    private View mControlsView;
-    private final Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-            mControlsView.setVisibility(View.VISIBLE);
-        }
-    };
-    private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };
+    //constructors
+    public SymbolsActivity(List<Class> gameActivity, int totscore) {
+        super(gameActivity, totscore);
+    }
+
+    public SymbolsActivity() {
+        super();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //receive last game data
+        receiveLastGameData();
+
+        setupGame();
+    }
+
+    private void setupGame() {
         setContentView(R.layout.activity_symbols);
 
-        mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        symbols.clear();
+        solution.clear();
+        solution_symbol.clear();
 
+        //give each button a random, non-repeated symbol, out of the symbol list
+        chooseSymbols();
+        initButtons();
 
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
+        //out of the selected symbols, choose four of them which will be the correct ones
+        createSolution();
+
+        //transmit the four symbols to the watch, and start its activity
+        transmitSolution();
+    }
+
+    private void initButtons() {
+        for(Integer i = 1; i <= 16; i++){
+            String buttonID = "button" + i.toString();
+            int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+            Button button = findViewById(resID);
+            String value = String.valueOf(symbols.get(i-1));
+            button.setText(value);
+        }
+    }
+
+    private void transmitSolution() {
+        //cast solution to string for transmission
+        StringBuilder result = new StringBuilder(solution_symbol.size());
+        for (Character c : solution_symbol) {
+            result.append(c);
+        }
+        String solution_symbol_string = result.toString();
+
+        //transmit and start activity
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.SYMBOLS.name());
+        intent.putExtra(WearService.DATAMAP_SYMBOL_ARRAYLIST, solution_symbol_string);
+        startService(intent);
+    }
+
+    private void createSolution() {
+        int symbolCounter = 0;
+
+        while (symbolCounter != 4) {
+            Random r = new Random();
+            int index = r.nextInt(16);
+
+            if (!solution.contains(index)) { //choose four ints/symbols which will be the solution
+                solution.add(index);
+                solution_symbol.add(symbols.get(index));
+                symbolCounter = symbolCounter + 1;
             }
-        });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-    private void toggle() {
-        if (mVisible) {
-            hide();
-        } else {
-            show();
         }
     }
 
-    private void hide() {
-        // Hide UI first
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
+    private void chooseSymbols() {
+        int symbolCounter = 0;
+        ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
+
+        while (symbolCounter != 16) {
+            Random r = new Random();
+            int index = r.nextInt(23);
+
+            if (!chosenIndices.contains(index)) { //add a random symbol to list and keep track of
+                //what has been added to not add the same twice
+                chosenIndices.add(index);
+                symbols.add(getResources().getString(R.string.symbols).charAt(index));
+                symbolCounter = symbolCounter + 1;
+            }
         }
-        mControlsView.setVisibility(View.GONE);
-        mVisible = false;
-
-        // Schedule a runnable to remove the status and navigation bar after a delay
-        mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
-    @SuppressLint("InlinedApi")
-    private void show() {
-        // Show the system bar
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        mVisible = true;
+    public void check_symbol(View view) {
+        Button button = findViewById(view.getId());
 
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
+        if(solution_symbol.contains(button.getText().charAt(0))){ //charAt(0) is a safety measure
 
-    /**
-     * Schedules a call to hide() in delay milliseconds, canceling any
-     * previously scheduled calls.
-     */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
+            //if answer is correct, remove answer from solution
+            int index = solution_symbol.indexOf(button.getText().charAt(0));
+            solution_symbol.remove(index);
+
+            //turn button green
+            button.setBackgroundColor(Color.GREEN);
+
+            if(solution_symbol.isEmpty()){
+                //game is won
+                initializeNextGame();
+            }
+        }
+        else{
+            //if answer is false, turn button red
+            button.setBackgroundColor(Color.RED);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //Do something after 100ms
+                    setupGame();
+                }
+            }, 500);
+        }
+
+        button.setEnabled(false);
     }
 }
