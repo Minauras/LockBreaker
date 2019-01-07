@@ -21,8 +21,6 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
     private SensorManager mSensorManager;
     private Sensor mSensor;
 
-    public static final String STARTACTIVITY = "STARTACTIVITY";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +28,6 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
 
         mTextView = (TextView) findViewById(R.id.text);
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("WATCHTAGS", "SETTING");
-                mTextView.setText("Button Clicked");
-            }
-        }, new IntentFilter(STARTACTIVITY));
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 

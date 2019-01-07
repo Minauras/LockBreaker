@@ -15,8 +15,8 @@ public class StartGameActivity extends MiniGame{
     private Button mOptionButton;
     private Button mStatButton;
 
-    private static int NBRMINIGAMES = 4;
-    private int nbrGames = 4;
+    private static int NBRMINIGAMES = 5;
+    private int nbrGames = 5;
 
     public StartGameActivity(List<Class> gameActivity, int totscore) {
         super(gameActivity, totscore);
@@ -67,6 +67,7 @@ public class StartGameActivity extends MiniGame{
         games.add(MisleadingColorsActivity.class);
         games.add(SpaceWordActivity.class);
         games.add(PerilousJourneyActivity.class);
+        games.add(StepByStepActivity.class);
 
         // Randomize the list of games
         Collections.shuffle(games);

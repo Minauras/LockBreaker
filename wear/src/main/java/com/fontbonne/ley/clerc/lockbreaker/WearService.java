@@ -75,6 +75,11 @@ public class WearService extends WearableListenerService {
                 putDataMapRequest.getDataMap().putFloat(BuildConfig.W_lux_value, intent.getFloatExtra(LUX, 1000));
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
+            case STEP:
+                putDataMapRequest = PutDataMapRequest.create(BuildConfig.W_step_mobile);
+                putDataMapRequest.getDataMap().putInt(BuildConfig.W_step_count, intent.getIntExtra(STEPCOUNT, 0));
+                sendPutDataMapRequest(putDataMapRequest);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -86,6 +91,7 @@ public class WearService extends WearableListenerService {
     public static final String ACTIVITY_TO_START = "ACTIVITY_TO_START";
 
     public static final String MESSAGE = "MESSAGE";
+    public static final String STEPCOUNT = "STEPCOUNT";
     public static final String DATAMAP_INT = "DATAMAP_INT";
     public static final String DATAMAP_INT_ARRAYLIST = "DATAMAP_INT_ARRAYLIST";
     public static final String IMAGE = "IMAGE";
@@ -177,6 +183,12 @@ public class WearService extends WearableListenerService {
                         startActivity(intent);
                         //LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                         break;
+                    case BuildConfig.W_step_wear:
+                        int stepCount = dataMapItem.getDataMap().getInt(BuildConfig.W_step_count, 0);
+                        intent = new Intent(StepByStep.STEPINTENTWEAR);
+                        intent.putExtra(StepByStep.STEPCOUNT, stepCount);
+                        LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
+                        break;
                     default:
                         Log.v(TAG, "Data changed for unhandled path: " + uri);
                         break;
@@ -244,6 +256,10 @@ public class WearService extends WearableListenerService {
             case BuildConfig.W_perilous_journey:
                 Intent intent_perilous_journey = new Intent(this, PerilousJourney.class);
                 startActivity(intent_perilous_journey);
+                break;
+            case BuildConfig.W_step_by_step:
+                Intent intent_step_by_step = new Intent(this, StepByStep.class);
+                startActivity(intent_step_by_step);
                 break;
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
@@ -340,6 +356,6 @@ public class WearService extends WearableListenerService {
 
     // Constants
     public enum ACTION_SEND {
-        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, LUX
+        STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, LUX, STEP
     }
 }

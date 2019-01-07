@@ -93,11 +93,11 @@ public class SpaceWordActivity extends MiniGame {
 
     private void databaseStuff() {
         database.add("Hello");
-        database.add("Darkness");
+        database.add("Dark");
         database.add("Friend");
         database.add("Again");
-        database.add("Simon");
-        database.add("Garfunkel");
+        database.add("Siesta");
+        database.add("Garage");
     }
 
 }

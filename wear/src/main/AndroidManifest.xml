@@ -62,7 +62,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SpaceWord" />
-        <activity android:name=".PerilousJourney"></activity>
+        <activity android:name=".PerilousJourney" />
+        <activity android:name=".StepByStep"></activity>
     </application>
 
 </manifest>

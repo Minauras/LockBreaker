@@ -81,6 +81,14 @@ public class WearService extends WearableListenerService {
             case PERILOUSJOURNEY:
                 sendMessage("Start Activity", BuildConfig.W_perilous_journey);
                 break;
+            case STEPBYSTEP:
+                sendMessage("Start Activity", BuildConfig.W_step_by_step);
+                break;
+            case STEP:
+                putDataMapRequest = PutDataMapRequest.create(BuildConfig.W_step_wear);
+                putDataMapRequest.getDataMap().putInt(BuildConfig.W_step_count, intent.getIntExtra(STEPCOUNT, 0));
+                sendPutDataMapRequest(putDataMapRequest);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -92,6 +100,7 @@ public class WearService extends WearableListenerService {
     public static final String ACTIVITY_TO_START = "ACTIVITY_TO_START";
 
     public static final String MESSAGE = "MESSAGE";
+    public static final String STEPCOUNT = "STEPCOUNT";
     public static final String DATAMAP_INT = "DATAMAP_INT";
     public static final String DATAMAP_INT_ARRAYLIST = "DATAMAP_INT_ARRAYLIST";
     public static final String DATAMAP_COLOR_ARRAYLIST = "DATAMAP_COLOR_ARRAYLIST";
@@ -189,6 +198,12 @@ public class WearService extends WearableListenerService {
                         float lux_value = dataMapItem.getDataMap().getFloat(BuildConfig.W_lux_value);
                         intent = new Intent(PerilousJourneyActivity.SENDINGLUXVALUE);
                         intent.putExtra(PerilousJourneyActivity.LUXVALUE, lux_value);
+                        LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
+                        break;
+                    case BuildConfig.W_step_mobile:
+                        int stepCount = dataMapItem.getDataMap().getInt(BuildConfig.W_step_count, 0);
+                        intent = new Intent(StepByStepActivity.STEPINTENTMOBILE);
+                        intent.putExtra(StepByStepActivity.STEPCOUNT, stepCount);
                         LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
                         break;
                     default:
@@ -347,6 +362,6 @@ public class WearService extends WearableListenerService {
     // Constants
     public enum ACTION_SEND {
         STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
-        PERILOUSJOURNEY
+        PERILOUSJOURNEY, STEP, STEPBYSTEP
     }
 }

@@ -60,7 +60,8 @@
             android:name=".SpaceWordActivity"
             android:label="@string/title_activity_space_word"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PerilousJourneyActivity"></activity>
+        <activity android:name=".PerilousJourneyActivity" />
+        <activity android:name=".StepByStepActivity"></activity>
     </application>
 
 </manifest>
