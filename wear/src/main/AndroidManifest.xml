@@ -68,7 +68,8 @@
             android:name=".SymbolsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_symbols"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".MazeControlsActivity"></activity>
     </application>
 
 </manifest>

@@ -47,6 +47,7 @@ allprojects {
                 profile_path : "/PROFILE",
                 profile_key : "profile_key",
                 symbols_key         : "/Symbols",
+                maze_controls_key   : "/MazeControls",
         ]
     }
 }

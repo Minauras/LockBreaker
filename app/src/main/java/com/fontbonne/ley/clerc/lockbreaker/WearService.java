@@ -92,6 +92,8 @@ public class WearService extends WearableListenerService {
             case SYMBOLS:
                 sendMessage(intent.getStringExtra(DATAMAP_SYMBOL_ARRAYLIST), BuildConfig.W_symbols_key);
                 break;
+            case MAZE_CONTROLS:
+                sendMessage("Start Activity", BuildConfig.W_maze_controls_key);
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -270,6 +272,11 @@ public class WearService extends WearableListenerService {
                 putDataMapRequest.getDataMap().putIntegerArrayList(BuildConfig.W_some_other_key, arrayList);
                 sendPutDataMapRequest(putDataMapRequest);
                 break;
+            case BuildConfig.W_maze_controls_key:
+                Intent intent = new Intent(MazeControlsActivity.WEAR_MAZE_CONTROL);
+                intent.putExtra(MazeControlsActivity.TURN_DATA, data);
+                LocalBroadcastManager.getInstance(WearService.this).sendBroadcast(intent);
+                break;
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }
@@ -366,6 +373,6 @@ public class WearService extends WearableListenerService {
     // Constants
     public enum ACTION_SEND {
         STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
-        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS
+        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS, MAZE_CONTROLS
     }
 }
