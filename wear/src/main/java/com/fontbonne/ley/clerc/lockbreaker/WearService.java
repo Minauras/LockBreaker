@@ -219,12 +219,19 @@ public class WearService extends WearableListenerService {
 
         if (path.equals(BuildConfig.W_path_start_activity)
                 && data.equals(BuildConfig.W_mainactivity)) {
-            startActivity(new Intent(this, MainActivity.class));
+            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(mainActivityIntent);
         }
+
+        Log.d("NICO", String.valueOf(path.equals(BuildConfig.W_waldo)));
+
+
 
         switch (path) {
             case BuildConfig.W_path_start_activity:
                 Log.v(TAG, "Message asked to open Activity");
+
                 Intent startIntent = null;
                 switch (data) {
                     case BuildConfig.W_mainactivity:
@@ -255,25 +262,38 @@ public class WearService extends WearableListenerService {
                 break;
             case BuildConfig.W_space_word_answer:
                 Intent intent_space_word = new Intent(this, SpaceWord.class);
+                intent_space_word.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent_space_word.putExtra(SpaceWord.ANSWER, data);
                 startActivity(intent_space_word);
                 break;
             case BuildConfig.W_perilous_journey:
                 Intent intent_perilous_journey = new Intent(this, PerilousJourney.class);
+                intent_perilous_journey.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_perilous_journey);
                 break;
             case BuildConfig.W_step_by_step:
                 Intent intent_step_by_step = new Intent(this, StepByStep.class);
+                intent_step_by_step.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_step_by_step);
                 break;
             case BuildConfig.W_symbols_key:
                 Intent intent_symbols = new Intent(this, SymbolsActivity.class);
+                intent_symbols.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent_symbols.putExtra(SymbolsActivity.START_SYMBOLS, data);
                 startActivity(intent_symbols);
                 break;
             case BuildConfig.W_maze_controls_key:
                 Intent intent_maze = new Intent(this, MazeControlsActivity.class);
+                intent_maze.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_maze);
+                break;
+            case BuildConfig.W_waldo:
+                Intent intent_waldo = new Intent(this, WaldoProfileActivity.class);
+                intent_waldo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent_waldo.putExtra(WaldoProfileActivity.WALDO_NAME, data);
+                startActivity(intent_waldo);
+                break;
+
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }

@@ -86,6 +86,9 @@ public class SpaceWord extends WearableActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_space_word);
+
+        Log.d("NICO", "SpaceWord");
+
         letterTextView = findViewById(R.id.lettertextview);
 
         Intent intent = getIntent();

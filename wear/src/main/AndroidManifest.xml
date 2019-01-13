@@ -69,7 +69,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_symbols"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".MazeControlsActivity"></activity>
+        <activity android:name=".MazeControlsActivity" />
+        <activity android:name=".WaldoProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -94,6 +94,10 @@ public class WearService extends WearableListenerService {
                 break;
             case MAZE_CONTROLS:
                 sendMessage("Start Activity", BuildConfig.W_maze_controls_key);
+            case WALDO:
+                Log.d("CHARLIE", BuildConfig.W_waldo);
+                sendMessage(intent.getStringExtra(WALDO), BuildConfig.W_waldo);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -107,6 +111,7 @@ public class WearService extends WearableListenerService {
     public static final String MESSAGE = "MESSAGE";
     public static final String STEPCOUNT = "STEPCOUNT";
     public static final String DATAMAP_SYMBOL_ARRAYLIST = "DATAMAP_SYMBOL_ARRAYLIST";
+    public static final String WALDO = "WALDO";
     public static final String DATAMAP_INT = "DATAMAP_INT";
     public static final String DATAMAP_INT_ARRAYLIST = "DATAMAP_INT_ARRAYLIST";
     public static final String DATAMAP_COLOR_ARRAYLIST = "DATAMAP_COLOR_ARRAYLIST";
@@ -373,6 +378,6 @@ public class WearService extends WearableListenerService {
     // Constants
     public enum ACTION_SEND {
         STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
-        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS, MAZE_CONTROLS
+        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS, MAZE_CONTROLS, WALDO
     }
 }

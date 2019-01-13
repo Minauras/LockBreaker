@@ -19,6 +19,8 @@ public class MazeControlsActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maze_controls);
 
+        Log.d("NICO", "MazeControlsActivity");
+
         Intent intent = getIntent();
 
         Button leftButton = findViewById(R.id.leftButton);

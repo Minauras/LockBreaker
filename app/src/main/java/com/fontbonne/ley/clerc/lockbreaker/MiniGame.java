@@ -54,6 +54,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
 
     // Call this method to pass to next mini-game --------------------------------------------------
     protected void initializeNextGame(){
+
         updateScore();
         findNext();
         Constructor<?>[] nextGameConstructor = null;
@@ -61,6 +62,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         Method nextGameMethod = null;
         Log.e("TAG_PAT", "totalScore" + totalScore);
         try {
+
             nextGameConstructor = nextGame.getConstructors();
             nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore });
             nextGameMethod = nextGameObj.getClass().getMethod("startGame", Context.class);

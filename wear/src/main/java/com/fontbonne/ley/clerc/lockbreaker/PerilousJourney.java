@@ -26,6 +26,8 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perilous_journey);
 
+        Log.d("NICO", "PerilousJourney");
+
         mTextView = (TextView) findViewById(R.id.text);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);

@@ -46,6 +46,8 @@ public class MisleadingColors extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misleading_colors);
 
+        Log.d("NICO", "MisleadingColors");
+
         Intent intent = getIntent();
         arr_col = intent.getIntegerArrayListExtra(MISLEADINGCOLORS_ARRAYLIST);
         for(int i=0; i<8; i++) {
