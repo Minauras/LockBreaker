@@ -78,7 +78,8 @@
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".EncryptedActivity"
-            android:label="@string/title_activity_encrypted"></activity>
+            android:label="@string/title_activity_encrypted" />
+        <activity android:name=".SimilarAnswerActivity"></activity>
     </application>
 
 </manifest>

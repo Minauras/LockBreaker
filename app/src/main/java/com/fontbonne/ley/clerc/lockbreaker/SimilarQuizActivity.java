@@ -109,7 +109,7 @@ public class SimilarQuizActivity extends MiniGame {
         if (questionId < NB_QUESTIONS){
 
             Log.d("AZERTY", questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
-
+            startWatchActivity(questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
             questionTextView.setText(questions[questionId].getQuestion());
             answer0.setText(questions[questionId].getAnswer(0));
             answer1.setText(questions[questionId].getAnswer(1));
@@ -117,7 +117,6 @@ public class SimilarQuizActivity extends MiniGame {
             answer3.setText(questions[questionId].getAnswer(3));
         }
         else{
-            Log.d("AZERTY", "JUMP TO NEXT MINIGAME");
             initializeNextGame();
         }
 
@@ -171,6 +170,13 @@ public class SimilarQuizActivity extends MiniGame {
         }
         return json;
 
+    }
+
+    private void startWatchActivity(String answer) {
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.SIMILAR.name());
+        intent.putExtra(WearService.SIMILAR, answer);
+        startService(intent);
     }
 
 

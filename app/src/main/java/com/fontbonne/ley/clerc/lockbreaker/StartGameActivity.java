@@ -67,7 +67,7 @@ public class StartGameActivity extends MiniGame{
 
         //games.add(WaldoActivity.class);
 
-        games.add(SimilarQuizActivity.class);
+        games.add(SimilarQuizActivity.class);/*
         games.add(MisleadingColorsActivity.class);
         games.add(SpaceWordActivity.class);
         games.add(PerilousJourneyActivity.class);
@@ -75,7 +75,7 @@ public class StartGameActivity extends MiniGame{
         games.add(SymbolsActivity.class);
         games.add(MazeControlsActivity.class);
         games.add(InvisibleMazeActivity.class);
-        games.add(EncryptedActivity.class);
+        games.add(EncryptedActivity.class);*/
 
         // Randomize the list of games
         Collections.shuffle(games);

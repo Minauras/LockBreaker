@@ -49,6 +49,7 @@ allprojects {
                 symbols_key         : "/Symbols",
                 maze_controls_key   : "/MazeControls",
                 waldo               : "/Waldo",
+                similar_answers     : "/Similar",
                 invisible_maze_key  : "/InvisibleMaze",
                 encrypted_key       : "/Encrypted",
         ]
