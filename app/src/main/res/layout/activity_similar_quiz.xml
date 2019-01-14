@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".SimilarQuizActivity">
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_similar_quiz" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_media_play" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:layout_centerVertical="true"
+        android:id="@+id/questionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Similar Quizzz"
+        android:textColor="@color/colorPrimary"
         android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|center" />
+        android:textSize="32dp"
+        android:text="question"
+        android:layout_marginHorizontal="30dp"
+        android:paddingBottom="50dp"/>
 
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:layout_below="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/answer0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer0"
+                android:layout_weight="1"
+                android:onClick="CheckAnswer"/>
+            <Button
+                android:id="@+id/answer1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer1"
+                android:layout_weight="1"
+                android:onClick="CheckAnswer"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/answer2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer2"
+                android:layout_weight="1"
+                android:onClick="CheckAnswer"/>
+            <Button
+                android:id="@+id/answer3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="answer3"
+                android:layout_weight="1"
+                android:onClick="CheckAnswer"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

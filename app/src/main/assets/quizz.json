@@ -1,0 +1,66 @@
+{
+    "q0":{
+        "question" : "What is displayed on the watch",
+        "answers" : [
+            " ",
+            "nothing",
+            "blank",
+            "there’s nothing"]
+    },
+    "q1":{
+        "question" : "What word is displayed on the watch?",
+        "answers" : [
+            "yeah",
+            "yea",
+            "ye",
+            "yeah without an h"]
+    },
+    "q2":{
+        "question" : "What word is displayed on the watch?",
+        "answers" : [
+            "two",
+            "too",
+            "2",
+            "42"]
+    },
+    "q3":{
+        "question" : "What is the answer displayed on the watch?",
+        "answers" : [
+            "The answer is no",
+            "no",
+            "nop",
+            "none"]
+    },
+    "q4":{
+        "question" : "What is love?",
+        "answers" : [
+            "Baby don't hurt me ",
+            "Don't hurt me ",
+            "Trick question",
+            "'Love' is just a chemical reaction that compels animal to breed. It hit hard, then it slowly fade, leaving you stranded in a failing marriage"]
+    },
+    "q5":{
+        "question" : "What is on the Wifi code?",
+        "answers" : [
+            "A2VCTKj6G",
+            "A2WCTKJ6g",
+            "A2VCTKj6Gz",
+            "I don't remember exactly"]
+    },
+    "q6":{
+        "question" : "What is the purpose of life?",
+        "answers" : [
+            "None of the bellow",
+            "answer 1",
+            "answer 2",
+            "None of the above"]
+    },
+    "q7":{
+        "question" : "What word is displayed on the watch? ",
+        "answers" : [
+            "your",
+            "you’re",
+            "you are",
+            "ur"]
+    }
+}
