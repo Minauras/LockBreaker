@@ -70,7 +70,12 @@
             android:label="@string/title_activity_symbols"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".MazeControlsActivity" />
-        <activity android:name=".WaldoProfileActivity"></activity>
+        <activity android:name=".WaldoProfileActivity" />
+        <activity
+            android:name=".InvisibleMazeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_invisible_maze"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

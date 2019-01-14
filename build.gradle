@@ -48,7 +48,8 @@ allprojects {
                 profile_key : "profile_key",
                 symbols_key         : "/Symbols",
                 maze_controls_key   : "/MazeControls",
-                waldo               : "/Waldo"
+                waldo               : "/Waldo",
+                invisible_maze_key  : "/InvisibleMaze",
         ]
     }
 }

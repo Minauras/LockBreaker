@@ -287,6 +287,12 @@ public class WearService extends WearableListenerService {
                 intent_maze.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent_maze);
                 break;
+            case BuildConfig.W_invisible_maze_key:
+                Intent intent_cells = new Intent(this, InvisibleMazeActivity.class);
+                intent_cells.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent_cells.putExtra(InvisibleMazeActivity.MAZE_CELLS, data);
+                startActivity(intent_cells);
+                break;
             case BuildConfig.W_waldo:
                 Intent intent_waldo = new Intent(this, WaldoProfileActivity.class);
                 intent_waldo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

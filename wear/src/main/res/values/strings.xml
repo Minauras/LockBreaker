@@ -11,4 +11,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="symbols">ϘӬ©ΨѦѼ¶ƛϿҨѢ҂ϞҖѬϾ☆Ԇ¿ѮҊ★Ω</string>
+
+    <string name="title_activity_invisible_maze">InvisibleMazeActivity</string>
 </resources>

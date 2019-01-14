@@ -57,6 +57,7 @@ public class MazeControlsActivity extends MiniGame {
                 }
             }
         }, new IntentFilter(WEAR_MAZE_CONTROL));
+
     }
 
     public void forwardButtonCallback(View view) {

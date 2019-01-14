@@ -19,7 +19,6 @@ public class MazeControlsActivity extends WearableActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maze_controls);
 
-        Log.d("NICO", "MazeControlsActivity");
 
         Intent intent = getIntent();
 
@@ -38,6 +37,7 @@ public class MazeControlsActivity extends WearableActivity {
                 sendTurn("turn_right");
             }
         });
+
     }
 
     private void sendTurn(String message) {
