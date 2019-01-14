@@ -1,14 +1,22 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -104,7 +112,8 @@ public class EncryptedActivity extends MiniGame {
 
 
     private String chooseWord() {
-        String word = "JOURNEY";
+        Word chosenWord = new Word();
+        String word = chosenWord.word;
         int number_symbols = word.length();
 
         //choose the symbols corresponding to each letter randomly
@@ -137,7 +146,7 @@ public class EncryptedActivity extends MiniGame {
 
             index = r.nextInt(26);
             Character letter = getResources().getString(R.string.alphabet).charAt(index);
-            while(letters.contains(letter)){
+            while (letters.contains(letter)) {
                 index = r.nextInt(26);
                 letter = getResources().getString(R.string.alphabet).charAt(index);
             }
@@ -177,4 +186,46 @@ public class EncryptedActivity extends MiniGame {
             }, 500);
         }
     }
+
+
+    private class Word {
+        String word;
+
+        public Word(){
+            Random rand = new Random();
+            String json = loadJSONFromAsset(EncryptedActivity.this);
+            try {
+                JSONObject reader = new JSONObject(json);
+                int randCeiling = reader.getInt("nb");
+
+                int index = rand.nextInt(randCeiling);
+
+                String idx = "w" + index;
+
+                this.word = reader.getString(idx);
+            }
+            catch (Exception e){
+                this.word = "JUSTICE";
+            }
+        }
+
+        private String loadJSONFromAsset(Context context) {
+            String json = null;
+            try {
+                InputStream is = context.getAssets().open("encrypted.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                json = new String(buffer, "UTF-8");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+            return json;
+
+        }
+    }
+
+
 }

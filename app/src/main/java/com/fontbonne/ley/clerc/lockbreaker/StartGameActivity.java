@@ -16,8 +16,8 @@ public class StartGameActivity extends MiniGame{
     private Button mOptionButton;
     private Button mStatButton;
 
-    private static int NBRMINIGAMES = 9;
-    private int nbrGames = 9;
+    private static int NBRMINIGAMES = 1;
+    private int nbrGames = 1;
 
     public StartGameActivity(List<Class> gameActivity, int totscore) {
         super(gameActivity, totscore);
