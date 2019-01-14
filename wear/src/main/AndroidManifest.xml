@@ -75,7 +75,10 @@
             android:name=".InvisibleMazeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_invisible_maze"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".EncryptedActivity"
+            android:label="@string/title_activity_encrypted"></activity>
     </application>
 
 </manifest>

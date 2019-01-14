@@ -102,6 +102,9 @@ public class WearService extends WearableListenerService {
             case INVISIBLE_MAZE:
                 sendMessage(intent.getStringExtra(MAZE_CELLS), BuildConfig.W_invisible_maze_key);
                 break;
+            case ENCRYPTED:
+                sendMessage(intent.getStringExtra(ENCRYPTED_DATA), BuildConfig.W_encrypted_key);
+                break;
             default:
                 Log.w(TAG, "Unknown action");
                 break;
@@ -121,6 +124,7 @@ public class WearService extends WearableListenerService {
     public static final String DATAMAP_COLOR_ARRAYLIST = "DATAMAP_COLOR_ARRAYLIST";
     public static final String IMAGE = "IMAGE";
     public static final String MAZE_CELLS = "MAZE_CELLS";
+    public static final String ENCRYPTED_DATA = "ENCRYPTED_DATA";
     public static final String PATH = "PATH";
 
     public static Asset createAssetFromBitmap(Bitmap bitmap) {
@@ -383,6 +387,6 @@ public class WearService extends WearableListenerService {
     // Constants
     public enum ACTION_SEND {
         STARTACTIVITY, MESSAGE, EXAMPLE_DATAMAP, EXAMPLE_ASSET, MISLEADINGCOLORS, SPACEWORD,
-        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS, MAZE_CONTROLS, WALDO, INVISIBLE_MAZE
+        PERILOUSJOURNEY, STEP, STEPBYSTEP, SYMBOLS, MAZE_CONTROLS, WALDO, INVISIBLE_MAZE, ENCRYPTED
     }
 }

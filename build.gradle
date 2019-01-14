@@ -50,6 +50,7 @@ allprojects {
                 maze_controls_key   : "/MazeControls",
                 waldo               : "/Waldo",
                 invisible_maze_key  : "/InvisibleMaze",
+                encrypted_key       : "/Encrypted",
         ]
     }
 }

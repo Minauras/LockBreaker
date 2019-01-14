@@ -299,7 +299,12 @@ public class WearService extends WearableListenerService {
                 intent_waldo.putExtra(WaldoProfileActivity.WALDO_NAME, data);
                 startActivity(intent_waldo);
                 break;
-
+            case BuildConfig.W_encrypted_key:
+                Intent intent_encrypted = new Intent(this, EncryptedActivity.class);
+                intent_encrypted.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent_encrypted.putExtra(EncryptedActivity.ENCRYPTED_DATA, data);
+                startActivity(intent_encrypted);
+                break;
             default:
                 Log.w(TAG, "Received a message for unknown path " + path + " : " + new String(messageEvent.getData()));
         }

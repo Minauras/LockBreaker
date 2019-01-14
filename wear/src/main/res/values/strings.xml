@@ -13,4 +13,6 @@
     <string name="symbols">ϘӬ©ΨѦѼ¶ƛϿҨѢ҂ϞҖѬϾ☆Ԇ¿ѮҊ★Ω</string>
 
     <string name="title_activity_invisible_maze">InvisibleMazeActivity</string>
+    <string name="title_activity_encrypted">EncryptedActivity</string>
+    <string name="tab">\u0009</string>
 </resources>
