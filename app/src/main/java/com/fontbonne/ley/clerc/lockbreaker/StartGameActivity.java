@@ -90,7 +90,7 @@ public class StartGameActivity extends MiniGame {
 
     private void setupGame() {
         // Add all minigames here to games
-/*
+
         games.add(MazeControlsActivity.class);
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
@@ -100,8 +100,7 @@ public class StartGameActivity extends MiniGame {
         games.add(StepByStepActivity.class);
         games.add(SymbolsActivity.class);
         games.add(InvisibleMazeActivity.class);
-        games.add(EncryptedActivity.class);*/
-        games.add(InvisibleMazeActivity.class);
+        games.add(EncryptedActivity.class);
 
         // Randomize the list of games
         Collections.shuffle(games);
