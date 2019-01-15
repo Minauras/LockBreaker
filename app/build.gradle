@@ -47,4 +47,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     wearApp project(':wear')
     implementation 'com.google.android.gms:play-services-wearable:+'
+    implementation 'com.github.yesterselga:country-picker-android:1.0'
+
 }

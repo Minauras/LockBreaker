@@ -17,6 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.ybs.countrypicker.CountryPicker;
+import com.ybs.countrypicker.CountryPickerListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,7 +52,16 @@ public class RegisterActivity extends AppCompatActivity {
         mEmailEditText = (EditText) findViewById(R.id.emailText);
         mUsernameEditText = (EditText) findViewById(R.id.usernameText);
         mPasswordEditText = (EditText) findViewById(R.id.passwordText);
-
+/*
+        CountryPicker picker = CountryPicker.newInstance("Select Country");  // dialog title
+        picker.setListener(new CountryPickerListener() {
+            @Override
+            public void onSelectCountry(String name, String code, String dialCode, int flagDrawableResID) {
+                // Implement your code here
+            }
+        });
+        picker.show(getSupportFragmentManager(), "COUNTRY_PICKER");
+*/
 
         // Done Button Callback --------------------------------------------------------------------
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Create profile Locally ------------------------------------------------------------------
-        mUserProfile = new UserProfile(email, username, password);
+        mUserProfile = new UserProfile(email, username, password, "Suisse");
 
         // Register profile in Firebase ------------------------------------------------------------
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
