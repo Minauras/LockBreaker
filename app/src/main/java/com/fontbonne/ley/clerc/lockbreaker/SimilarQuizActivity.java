@@ -40,7 +40,7 @@ public class SimilarQuizActivity extends MiniGame {
     private final int NB_QUESTIONS = 3;
     private Question[] questions;
     private List<Integer> questionID;
-    private int currentQuestion = 0;
+    private int currentQuestion;
     private int score = 0;
 
     private TextView questionTextView;
@@ -57,6 +57,7 @@ public class SimilarQuizActivity extends MiniGame {
         setContentView(R.layout.activity_similar_quiz);
         receiveLastGameData();
 
+        Log.e("WALDO", "onCreate");
 
         questionTextView  = findViewById(R.id.questionTextView);
         answer0 = findViewById(R.id.answer0);
@@ -69,8 +70,10 @@ public class SimilarQuizActivity extends MiniGame {
 
         questions = new Question[NB_QUESTIONS];
 
+
         String json =  loadJSONFromAsset(this);
 
+        Log.e("WALDO", "before JSON");
 
         try {
             JSONObject obj = new JSONObject(json);
@@ -94,6 +97,7 @@ public class SimilarQuizActivity extends MiniGame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.e("WALDO", "after JSON");
 
 
         for (int i = 0; i < NB_QUESTIONS; i++){
@@ -101,6 +105,7 @@ public class SimilarQuizActivity extends MiniGame {
             Log.d("AZERTY", questions[i].getQuestion());
         }
 
+        currentQuestion = 0;
         updateLayout(currentQuestion);
     }
 
@@ -110,11 +115,17 @@ public class SimilarQuizActivity extends MiniGame {
 
             Log.d("AZERTY", questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
             startWatchActivity(questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
+            Log.d("AZERTY", "startWatchActivity");
+
             questionTextView.setText(questions[questionId].getQuestion());
+            Log.d("AZERTY", "questionTextView");
+
             answer0.setText(questions[questionId].getAnswer(0));
             answer1.setText(questions[questionId].getAnswer(1));
             answer2.setText(questions[questionId].getAnswer(2));
             answer3.setText(questions[questionId].getAnswer(3));
+            Log.d("AZERTY", "answer3");
+
         }
         else{
             initializeNextGame();

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CharacterView extends View {
@@ -40,13 +41,6 @@ public class CharacterView extends View {
 
     private String name;
 
-    private int count;
-
-    public boolean isThruthClick() {
-        return thruthClick;
-    }
-
-    private boolean thruthClick = false;
 
     public boolean isWaldo() {
         return isWaldo;
@@ -63,13 +57,17 @@ public class CharacterView extends View {
         super(context);
         mContext = context;
         this.isWaldo = isWaldo;
-        count = 0;
         this.name = name;
         this.scale = scale;
         this.xPos = x;
         this.yPos = y;
         //setFocusable(true);
         //setClickable(true);
+        float[] headPos = {23.159F*scale, 2.71F*scale, 123.159F*scale, 105.905F*scale};
+        headLeft = xPos+headPos[0];
+        headTop = yPos+headPos[1];
+        headRight = xPos+headPos[2];
+        headBottom = yPos+headPos[3];
 
 
         Random rnd = new Random(name.hashCode());
@@ -405,12 +403,8 @@ public class CharacterView extends View {
         RectF tshirtRect =  new RectF(xPos+tshirtPos[0], yPos+tshirtPos[1], xPos+tshirtPos[2], yPos+tshirtPos[3]);
         canvas.drawBitmap(tshirt, null, tshirtRect, null);
 
-        float[] headPos = {23.159F*scale, 2.71F*scale, 123.159F*scale, 105.905F*scale};
-        headLeft = xPos+headPos[0];
-        headTop = yPos+headPos[1];
-        headRight = xPos+headPos[2];
-        headBottom = yPos+headPos[3];
-        RectF headRect =  new RectF(xPos+headPos[0], yPos+headPos[1], xPos+headPos[2], yPos+headPos[3]);
+
+        RectF headRect =  new RectF(headLeft, headTop, headRight, headBottom);
         canvas.drawBitmap(head, null, headRect, null);
 
         if (hairIdx < 6 ){
@@ -489,11 +483,17 @@ public class CharacterView extends View {
         setMeasuredDimension(Math.round(maxX-minX), Math.round(maxY-minY));
     }*/
 
-    float[] getTouchSurface(){
-        float[] out = {headLeft, headRight, headTop, headBottom};
+    ArrayList<Float> getTouchSurface(){
+        ArrayList<Float> out = new ArrayList<>(4);
+        out.add(headLeft);
+        out.add(headRight);
+        out.add(headTop);
+        out.add(headBottom);
+        Log.d("HEAD", String.valueOf(headLeft) + ", " + String.valueOf(headTop) +", " + String.valueOf(headRight) + ", " +String.valueOf(headBottom));
+        Log.d("HEAD2", out.toString());
         return out;
     }
-
+/*
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         boolean out = super.onTouchEvent(event);
@@ -510,6 +510,6 @@ public class CharacterView extends View {
             }
         }
         return out;
-    }
+    }*/
 }
 

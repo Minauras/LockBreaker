@@ -11,16 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class WaldoActivity extends MiniGame //implements View.OnTouchListener
+public class WaldoActivity extends MiniGame implements View.OnTouchListener
 {
 
     private CharacterView mCharacter;
     private ViewGroup background;
     String waldosName = "";
+    ArrayList<ArrayList<Float>> touchSurfaces;
+    int waldoIdx;
 
     public WaldoActivity(List<Class> gameActivity, int totscore) {
         super(gameActivity, totscore);
@@ -46,6 +50,7 @@ public class WaldoActivity extends MiniGame //implements View.OnTouchListener
 
         int nbx = 5;
         int nby = 5;
+        touchSurfaces = new ArrayList<ArrayList<Float>>(nbx*nby);
 
         // at scale 1 ~ (150, 300) => 2 ~ (300, 600)
 
@@ -54,13 +59,15 @@ public class WaldoActivity extends MiniGame //implements View.OnTouchListener
 
         Random rnd = new Random();
 
-        int waldoIdx = rnd.nextInt(nbx*nby);
+        waldoIdx = rnd.nextInt(nbx*nby);
 
         background = findViewById(R.id.background);
+        background.setOnTouchListener(this);
 
         Date now = new Date();
         float x = 10, y = 10;
 
+        Log.d("CHARLIE", touchSurfaces.toString());
 
         for (int i = 0; i < nbx; i++){
             y = 10;
@@ -72,7 +79,9 @@ public class WaldoActivity extends MiniGame //implements View.OnTouchListener
                 }else{
                     mCharacter = new CharacterView(this, x, y,2L, name, false);
                 }
-                //mCharacter.setOnTouchListener(this);
+                touchSurfaces.add(mCharacter.getTouchSurface());
+                Log.d("CHARLIE", touchSurfaces.toString());
+
                 background.addView(mCharacter);
                 y += dy;
             }
@@ -81,31 +90,38 @@ public class WaldoActivity extends MiniGame //implements View.OnTouchListener
         Log.d("CHARLIE", waldosName);
         startWatchActivity();
     }
-    public void win(){
-        //Toast.makeText(this, "WIN", Toast.LENGTH_SHORT).show();
-        initializeNextGame();
-    }
-/*
+
+
     public boolean onTouch(View v, MotionEvent event){
 
-        CharacterView c = (CharacterView)v;
         float x  = event.getRawX();
         float y  = event.getRawY();
-        float[] head = c.getTouchSurface();
+
         int action = event.getActionMasked();
-        Log.d("AZERTY", String.valueOf(action));
-        if (action == 0 && x > head[0] && x < head[1] && y > head[2] && y < head[3]){
-            if (c.isWaldo()){
-                //thruthClick = true;
-                Toast.makeText(this, "WIN", Toast.LENGTH_SHORT).show();
-            }else{
-                //thruthClick = false;
-                Toast.makeText(this, "LOSE", Toast.LENGTH_SHORT).show();
+        Log.d("CHARLIE", String.valueOf(action));
+
+        /*if (action == 0){
+            Toast.makeText(this, String.valueOf(x) + ", " + String.valueOf(y),  Toast.LENGTH_SHORT).show();
+        }*/
+        for (int i = 0 ; i < touchSurfaces.size(); i++){
+            Log.d("CHARLIE", touchSurfaces.get(i).toString());
+
+            if (action == 0 && x > touchSurfaces.get(i).get(0) && x < touchSurfaces.get(i).get(1)  && y > touchSurfaces.get(i).get(2)  && y < touchSurfaces.get(i).get(3) ){
+
+                if (i == waldoIdx){
+                    //thruthClick = true;
+                    Toast.makeText(this, "WIN", Toast.LENGTH_SHORT).show();
+                    initializeNextGame();
+                }else{
+                    //thruthClick = false;
+                    Toast.makeText(this, "LOSE", Toast.LENGTH_SHORT).show();
+                }
             }
+
         }
         return true;
     }
-    */
+
 
     private void startWatchActivity() {
         Intent intent = new Intent(this, WearService.class);

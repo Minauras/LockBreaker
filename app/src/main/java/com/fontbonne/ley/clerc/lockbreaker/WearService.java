@@ -107,6 +107,8 @@ public class WearService extends WearableListenerService {
                 break;
             case SIMILAR:
                 sendMessage(intent.getStringExtra(SIMILAR), BuildConfig.W_similar_answers);
+                Log.w("AZERTY", "Message Sent");
+
                 break;
             default:
                 Log.w(TAG, "Unknown action");
