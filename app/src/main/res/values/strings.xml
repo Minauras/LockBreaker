@@ -13,6 +13,9 @@
     <string name="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="title_activity_symbols">SymbolsActivity</string>
 
+    <string name="channel_name">lockBreakerChannel</string>
+    <string name="channel_description">LockBreaker Channel</string>
+
     <string name="title_activity_maze_controls">MazeControlsActivity</string>
 
     <string name="title_activity_invisible_maze">InvisibleMazeActivity</string>

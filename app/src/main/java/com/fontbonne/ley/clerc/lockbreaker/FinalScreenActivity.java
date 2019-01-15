@@ -67,11 +67,16 @@ public class FinalScreenActivity extends MiniGame {
         } else {
             message = "You really need to learn to communicate :/";
         }
-
+        UserProfile user = new UserProfile();
+        boolean best = user.updateScore(totalScore);
         Log.d("NICOLAS", "HEY Here " + totalScore);
+        if (best){
+            message = "NEW BEST SCORE !!!!";
+        }
 
         mScoreTextView.setText(String.valueOf(totalScore));
         mMessageTextView.setText(message);
+
 
     }
 

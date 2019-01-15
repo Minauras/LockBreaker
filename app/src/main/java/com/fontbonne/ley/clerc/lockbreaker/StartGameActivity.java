@@ -1,7 +1,10 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,9 @@ public class StartGameActivity extends MiniGame{
     private static int NBRMINIGAMES = 1;
     private int nbrGames = 1;
 
+
+
+
     public StartGameActivity(List<Class> gameActivity, int totscore) {
         super(gameActivity, totscore);
     }
@@ -31,9 +37,13 @@ public class StartGameActivity extends MiniGame{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
+
+
         mStartButton = findViewById(R.id.playButton);
         mOptionButton = findViewById(R.id.optionButton);
         mStatButton = findViewById(R.id.statButton);
+
+
 
         setupGame();
 
@@ -61,8 +71,7 @@ public class StartGameActivity extends MiniGame{
             }
         });
 
-        UserProfile user = new UserProfile();
-        boolean best = user.updateScore(200);
+
     }
 
     private void setupGame() {

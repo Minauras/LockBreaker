@@ -20,7 +20,7 @@ public class UserProfile implements Serializable {
     String uID;
     String password;
     Integer maxScore;
-
+    Integer order;
     String country;
 
 
@@ -41,6 +41,8 @@ public class UserProfile implements Serializable {
             this.username = user.getDisplayName();
         }
         this.maxScore = 0;
+        this.order = 0;
+
 
 
     }
@@ -51,6 +53,7 @@ public class UserProfile implements Serializable {
         this.password = password;
         this.uID = "";
         this.maxScore = new Integer(0);
+        this.order = new Integer(0);
         this.country = "Suisse";
 
     }
@@ -67,6 +70,7 @@ public class UserProfile implements Serializable {
             mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child(uID).child("displayName").setValue(username);
             mDatabase.child(uID).child("maxScore").setValue(maxScore);
+            mDatabase.child(uID).child("order").setValue(order);
             mDatabase.child(uID).child("country").setValue(country);
 
         }
@@ -87,6 +91,7 @@ public class UserProfile implements Serializable {
 
                     if (score > maxScore.intValue()){
                         finalMDatabase.child(uID).child("maxScore").setValue(score);
+                        finalMDatabase.child(uID).child("order").setValue(-score);
                         out[0] = true;
                     }
 
