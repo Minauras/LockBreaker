@@ -30,6 +30,9 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected int totalScore;
     protected int score;
 
+    // Difficulty -------------------------------------------------------------------------------
+    protected int difficulty;
+
     // Constructor ---------------------------------------------------------------------------------
     public MiniGame(List<Class> gameList, int TotScore) {
         games = gameList;
