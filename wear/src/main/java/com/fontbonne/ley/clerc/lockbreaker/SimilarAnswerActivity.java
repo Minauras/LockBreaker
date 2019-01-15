@@ -27,4 +27,10 @@ public class SimilarAnswerActivity extends WearableActivity {
         mAnswer.setText(name);
 
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

@@ -40,7 +40,6 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
         setContentView(R.layout.activity_waldo);
         receiveLastGameData();
 
-        startWatchActivity();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -112,6 +111,7 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
                     //thruthClick = true;
                     Toast.makeText(this, "WIN", Toast.LENGTH_SHORT).show();
                     initializeNextGame();
+                    finish();
                 }else{
                     //thruthClick = false;
                     Toast.makeText(this, "LOSE", Toast.LENGTH_SHORT).show();

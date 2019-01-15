@@ -11,31 +11,48 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".StartGameActivity" />
-        <activity android:name=".OptionActivity" />
-        <activity android:name=".StatActivity" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".StartGameActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".OptionActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".StatActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".MisleadingColorsActivity"
+            android:screenOrientation="reversePortrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_misleading_colors"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@style/FullscreenTheme"/>
         <activity
             android:name=".SimilarQuizActivity"
             android:label="@string/title_activity_similar_quiz"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".FinalScreenActivity"
             android:label="@string/title_activity_final_screen"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <service android:name=".WearService">
             <intent-filter>
@@ -59,25 +76,37 @@
         <activity
             android:name=".SpaceWordActivity"
             android:label="@string/title_activity_space_word"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".PerilousJourneyActivity" />
-        <activity android:name=".StepByStepActivity" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".PerilousJourneyActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".StepByStepActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".SymbolsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_symbols"
-            android:theme="@style/FullscreenTheme" />
+            android:theme="@style/FullscreenTheme"
+            />
         <activity
             android:name=".MazeControlsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_maze_controls"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".WaldoActivity"
-            android:label="WaldoActivity" />
+            android:label="WaldoActivity"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".InvisibleMazeActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="reversePortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_invisible_maze"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".EncryptedActivity"></activity>

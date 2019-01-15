@@ -35,4 +35,10 @@ public class InvisibleMazeActivity extends WearableActivity {
         maze.decodeCellStream(cellStream);
         maze.refresh();
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

@@ -63,4 +63,10 @@ public class EncryptedActivity extends WearableActivity {
             this.letter = letter;
         }
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
                             new Pair[]{create(mLogo, "logoTransition"),  create(mScreen, "screenTransition")});
 
-                    sendStart(v);
+                    //sendStart(v);
                     startActivity(toLogin, options.toBundle());
                 } else {
                     startActivity(toLogin);

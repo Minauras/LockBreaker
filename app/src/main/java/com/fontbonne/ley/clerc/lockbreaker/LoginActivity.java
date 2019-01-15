@@ -27,6 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     String CHANNEL_ID = "my_channel_01";// The id of the channel.
 
+    public static final String LOGIN_TAG = "LOGIN_TAG";
+
     // User ----------------------------------------------------------------------------------------
     private UserProfile mUserProfile = null;
 

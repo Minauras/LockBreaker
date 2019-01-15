@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 public class PerilousJourney extends WearableActivity implements SensorEventListener {
 
-    private TextView mTextView;
     private SensorManager mSensorManager;
     private Sensor mSensor;
 
@@ -26,9 +25,7 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perilous_journey);
 
-        Log.d("NICO", "PerilousJourney");
 
-        mTextView = (TextView) findViewById(R.id.text);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -46,6 +43,7 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
+        finish();
     }
 
 
@@ -56,7 +54,6 @@ public class PerilousJourney extends WearableActivity implements SensorEventList
             if (sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
                 float lux = sensorEvent.values[0];
                 sendLux(lux);
-                if(mTextView != null) mTextView.setText(String.valueOf(lux));
             }
         }
     }

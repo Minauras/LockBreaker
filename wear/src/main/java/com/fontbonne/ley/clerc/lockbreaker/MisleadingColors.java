@@ -129,4 +129,10 @@ public class MisleadingColors extends WearableActivity {
                 Log.e("TAG_PAT", "ERROR THIS COLOR NOT KNOWN");
         }
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

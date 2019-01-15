@@ -6,6 +6,7 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:padding="15dp"
+    android:keepScreenOn="true"
     tools:context=".MisleadingColorsActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view

@@ -94,9 +94,8 @@ public class MazeView extends View {
         String[] streamArray = stream.split(" ");
         Cell[][] dummy_cells = new Cell[COLS][ROWS];
 
-        int element_number = ROWS*COLS*4;
         int i;
-        for(i = 0; i < element_number; i++){
+        for(i = 0; i < streamArray.length-2; i++){
             int col = (int) Math.floor((double) i / (double) 28);
             int row = (int) Math.floor((double)(i - 28*col) / (double) 4);
             int index = i % 4;
@@ -250,7 +249,7 @@ public class MazeView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(getResources().getColor(R.color.colorPrimaryDark));
 
         int width = getWidth();
         int height = getHeight();

@@ -82,7 +82,10 @@ public class PerilousJourneyActivity extends MiniGame {
                 }
                 else dragon_coming = false;
             }
-            if(progress_running == Distance_to_run) initializeNextGame();
+            if(progress_running == Distance_to_run){
+                initializeNextGame();
+                finish();
+            }
 
             timerHandler.postDelayed(this, 100);
         }

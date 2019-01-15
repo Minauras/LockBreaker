@@ -15,4 +15,6 @@
     <string name="title_activity_invisible_maze">InvisibleMazeActivity</string>
     <string name="title_activity_encrypted">EncryptedActivity</string>
     <string name="tab">\u0009</string>
+
+    <string name="title_activity_end_screen">EndScreenActivity</string>
 </resources>

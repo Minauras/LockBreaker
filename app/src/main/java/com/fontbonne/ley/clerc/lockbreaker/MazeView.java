@@ -95,7 +95,7 @@ public class MazeView extends View {
         Cell[][] dummy_cells = new Cell[COLS][ROWS];
 
         int i;
-        for(i = 0; i < stream.length()-2; i++){
+        for(i = 0; i < streamArray.length-2; i++){
             int col = (int) Math.floor((double) i / (double) 28);
             int row = (int) Math.floor((double)(i - 28*col) / (double) 4);
             int index = i % 4;
@@ -103,7 +103,7 @@ public class MazeView extends View {
             switch(index){
                 case 0:
                     dummy_cells[col][row] = new Cell(col, row, Direction.NONE);
-                    if(streamArray[i] == "1"){
+                    if(streamArray[i].equals("1")){
                         dummy_cells[col][row].topWall = true;
                     }
                     else{
@@ -111,7 +111,7 @@ public class MazeView extends View {
                     }
                     break;
                 case 1:
-                    if(streamArray[i] == "1"){
+                    if(streamArray[i].equals("1")){
                         dummy_cells[col][row].rightWall = true;
                     }
                     else{
@@ -119,7 +119,7 @@ public class MazeView extends View {
                     }
                     break;
                 case 2:
-                    if(streamArray[i] == "1"){
+                    if(streamArray[i].equals("1")){
                         dummy_cells[col][row].bottomWall = true;
                     }
                     else{
@@ -127,7 +127,7 @@ public class MazeView extends View {
                     }
                     break;
                 case 3:
-                    if(streamArray[i] == "1"){
+                    if(streamArray[i].equals("1")){
                         dummy_cells[col][row].leftWall = true;
                     }
                     else{
@@ -136,8 +136,8 @@ public class MazeView extends View {
                     break;
             }
         }
-        exit.col = Integer.parseInt(streamArray[i+1]);
-        exit.row = Integer.parseInt(streamArray[i+2]);
+        exit.col = Integer.parseInt(streamArray[i]);
+        exit.row = Integer.parseInt(streamArray[i+1]);
 
         cells = dummy_cells;
         invalidate();
@@ -249,7 +249,7 @@ public class MazeView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(getResources().getColor(R.color.colorPrimaryDark));
 
         int width = getWidth();
         int height = getHeight();

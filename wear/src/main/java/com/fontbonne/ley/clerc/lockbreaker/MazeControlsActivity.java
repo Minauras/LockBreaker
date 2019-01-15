@@ -47,4 +47,10 @@ public class MazeControlsActivity extends WearableActivity {
         startService(intent);
     }
 
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

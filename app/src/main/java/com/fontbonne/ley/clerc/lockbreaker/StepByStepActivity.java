@@ -41,7 +41,10 @@ public class StepByStepActivity extends MiniGame {
             godzillaWalking.stop();
             godzillaImageView.setX(dpWidth-(step)*step_size);
             score += 14;
-            if(dpWidth-(step)*step_size <= 100) initializeNextGame();
+            if(dpWidth-(step)*step_size <= 100){
+                initializeNextGame();
+                finish();
+            }
         }
     };
     Runnable timerCollapse = new Runnable() {

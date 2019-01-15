@@ -52,6 +52,7 @@ allprojects {
                 similar_answers     : "/Similar",
                 invisible_maze_key  : "/InvisibleMaze",
                 encrypted_key       : "/Encrypted",
+                end_screen          : "/EndScreen",
         ]
     }
 }

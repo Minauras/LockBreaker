@@ -129,6 +129,7 @@ public class SimilarQuizActivity extends MiniGame {
         }
         else{
             initializeNextGame();
+            finish();
         }
 
     }

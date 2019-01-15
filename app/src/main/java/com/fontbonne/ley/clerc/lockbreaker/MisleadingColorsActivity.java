@@ -84,7 +84,10 @@ public class MisleadingColorsActivity extends MiniGame {
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
-                else initializeNextGame();
+                else{
+                    initializeNextGame();
+                    finish();
+                }
             }
         });
 
@@ -104,7 +107,10 @@ public class MisleadingColorsActivity extends MiniGame {
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
-                else initializeNextGame();
+                else{
+                    initializeNextGame();
+                    finish();
+                }
             }
         });
 
@@ -124,7 +130,10 @@ public class MisleadingColorsActivity extends MiniGame {
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
-                else initializeNextGame();
+                else{
+                    initializeNextGame();
+                    finish();
+                }
             }
         });
 
@@ -144,7 +153,10 @@ public class MisleadingColorsActivity extends MiniGame {
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<3)setupGame();
-                else initializeNextGame();
+                else {
+                    initializeNextGame();
+                    finish();
+                }
             }
         });
         setupGame();

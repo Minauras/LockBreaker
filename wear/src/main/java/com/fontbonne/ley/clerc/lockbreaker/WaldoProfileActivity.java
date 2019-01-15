@@ -33,4 +33,10 @@ public class WaldoProfileActivity extends WearableActivity {
         // Enables Always-on
         setAmbientEnabled();
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

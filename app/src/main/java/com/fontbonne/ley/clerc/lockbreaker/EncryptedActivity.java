@@ -171,6 +171,7 @@ public class EncryptedActivity extends MiniGame {
             if (solution_symbol.isEmpty()) {
                 //game is won
                 initializeNextGame();
+                finish();
             }
         } else {
             //if answer is false, turn button red
@@ -226,6 +227,4 @@ public class EncryptedActivity extends MiniGame {
 
         }
     }
-
-
 }

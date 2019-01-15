@@ -60,4 +60,10 @@ public class StepByStep extends WearableActivity {
         intent.putExtra(WearService.STEPCOUNT, step);
         startService(intent);
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        finish();
+    }
 }

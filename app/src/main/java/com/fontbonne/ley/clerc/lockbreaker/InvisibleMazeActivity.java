@@ -49,6 +49,7 @@ public class InvisibleMazeActivity extends MiniGame {
         maze.movePlayer(MazeView.Direction.TOP);
         if(maze.checkWin()) {
             initializeNextGame();
+            finish();
         }
     }
 
@@ -56,6 +57,7 @@ public class InvisibleMazeActivity extends MiniGame {
         maze.movePlayer(MazeView.Direction.BOTTOM);
         if(maze.checkWin()) {
             initializeNextGame();
+            finish();
         }
     }
 
@@ -63,6 +65,7 @@ public class InvisibleMazeActivity extends MiniGame {
         maze.movePlayer(MazeView.Direction.LEFT);
         if(maze.checkWin()) {
             initializeNextGame();
+            finish();
         }
     }
 
@@ -70,6 +73,7 @@ public class InvisibleMazeActivity extends MiniGame {
         maze.movePlayer(MazeView.Direction.RIGHT);
         if(maze.checkWin()) {
             initializeNextGame();
+            finish();
         }
     }
 

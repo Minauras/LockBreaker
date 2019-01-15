@@ -131,6 +131,7 @@ public class SpaceWord extends WearableActivity implements SensorEventListener {
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
+        finish();
     }
 
 

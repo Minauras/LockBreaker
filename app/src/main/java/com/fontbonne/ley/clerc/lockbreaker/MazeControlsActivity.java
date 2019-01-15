@@ -64,6 +64,7 @@ public class MazeControlsActivity extends MiniGame {
         maze.movePlayer(MazeView.Direction.TOP);
         if(maze.checkWin()) {
             initializeNextGame();
+            finish();
         }
     }
 }

@@ -54,23 +54,34 @@
 
         <activity
             android:name=".MisleadingColors"
-            android:label="@string/title_activity_misleading_colors">
+            android:label="@string/title_activity_misleading_colors"
+            android:theme="@style/swipeLock">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpaceWord" />
-        <activity android:name=".PerilousJourney" />
-        <activity android:name=".StepByStep" />
+        <activity
+            android:name=".SpaceWord"
+            android:theme="@style/swipeLock" />
+        <activity
+            android:name=".PerilousJourney"
+            android:theme="@style/swipeLock" />
+        <activity
+            android:name=".StepByStep"
+            android:theme="@style/swipeLock" />
         <activity
             android:name=".SymbolsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_symbols"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".MazeControlsActivity" />
-        <activity android:name=".WaldoProfileActivity" />
+        <activity
+            android:name=".MazeControlsActivity"
+            android:theme="@style/swipeLock" />
+        <activity
+            android:name=".WaldoProfileActivity"
+            android:theme="@style/swipeLock" />
         <activity
             android:name=".InvisibleMazeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -78,8 +89,16 @@
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".EncryptedActivity"
-            android:label="@string/title_activity_encrypted" />
-        <activity android:name=".SimilarAnswerActivity"></activity>
+            android:label="@string/title_activity_encrypted"
+            android:theme="@style/swipeLock" />
+        <activity
+            android:name=".SimilarAnswerActivity"
+            android:theme="@style/swipeLock" />
+        <activity
+            android:name=".EndScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_end_screen"
+            android:theme="@style/FullscreenTheme2"></activity>
     </application>
 
 </manifest>

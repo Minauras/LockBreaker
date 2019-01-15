@@ -131,6 +131,7 @@ public class SymbolsActivity extends MiniGame {
             if(solution_symbol.isEmpty()){
                 //game is won
                 initializeNextGame();
+                finish();
             }
         }
         else{

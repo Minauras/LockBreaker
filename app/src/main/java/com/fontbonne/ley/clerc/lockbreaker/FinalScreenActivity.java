@@ -26,6 +26,7 @@ import java.util.List;
 
 public class FinalScreenActivity extends MiniGame {
 
+    public static final String RESTART_TAG = "RESTART_TAG";
 
     private TextView mScoreTextView;
     private TextView mMessageTextView;
@@ -77,15 +78,27 @@ public class FinalScreenActivity extends MiniGame {
         mScoreTextView.setText(String.valueOf(totalScore));
         mMessageTextView.setText(message);
 
-
+        //start the watch on the main screen
+        sendStart();
     }
 
     public void goToMenu(View view) {
         Intent toMenu = new Intent(FinalScreenActivity.this, StartGameActivity.class);
         startActivity(toMenu);
+        finish();
     }
 
     public void playAgain(View view) {
+        Intent intent = new Intent(this, StartGameActivity.class);
+        intent.putExtra(RESTART_TAG, "RESTART");
+        startActivity(intent);
+        finish();
+    }
 
+    public void sendStart() {
+        Intent intent = new Intent(this, WearService.class);
+        intent.setAction(WearService.ACTION_SEND.STARTACTIVITY.name());
+        intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_end_screen);
+        startService(intent);
     }
 }

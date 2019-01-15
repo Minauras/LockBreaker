@@ -68,7 +68,10 @@ public class SpaceWordActivity extends MiniGame {
                     }
                     nbrGamesPlayed++;
                     if (nbrGamesPlayed < 3) setupGame();
-                    else initializeNextGame();
+                    else{
+                        initializeNextGame();
+                        finish();
+                    }
                 }else {
                     Toast.makeText(SpaceWordActivity.this,
                             "Input a word to continue!", Toast.LENGTH_SHORT).show();
