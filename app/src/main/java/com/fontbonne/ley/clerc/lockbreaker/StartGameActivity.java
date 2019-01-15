@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,9 @@ public class StartGameActivity extends MiniGame {
     private Button mStartButton;
     private Button mOptionButton;
     private Button mStatButton;
+
+    private static final int GET_DIFFICULTY = 1;
+
 
     private static int NBRMINIGAMES = 1;
     private int nbrGames = 1;
@@ -63,16 +67,17 @@ public class StartGameActivity extends MiniGame {
         mOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent statIntent = new Intent(StartGameActivity.this, OptionActivity.class);
-                startActivity(statIntent);
+                Intent optionIntent = new Intent(StartGameActivity.this, OptionActivity.class);
+                optionIntent.putExtra(OptionActivity.DIFFICULTY_TAG, difficulty);
+                startActivityForResult(optionIntent, GET_DIFFICULTY);
             }
         });
 
         mStatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent optionIntent = new Intent(StartGameActivity.this, StatActivity.class);
-                startActivity(optionIntent);
+                Intent statIntent = new Intent(StartGameActivity.this, StatActivity.class);
+                startActivity(statIntent);
             }
         });
 
@@ -121,5 +126,16 @@ public class StartGameActivity extends MiniGame {
         intent.setAction(WearService.ACTION_SEND.STARTACTIVITY.name());
         intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_mainactivity);
         startService(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.d("DEBUGNICO","HEY2");
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_DIFFICULTY && resultCode == RESULT_OK && data != null) {
+            difficulty = (int) data.getIntExtra(OptionActivity.DIFFICULTY_TAG,1);
+            Log.d("DEBUGNICO",String.valueOf(difficulty));
+
+        }
     }
 }
