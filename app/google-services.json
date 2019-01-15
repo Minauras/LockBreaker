@@ -23,6 +23,58 @@
           }
         },
         {
+          "client_id": "1057306952431-3kio26nipk8n44n1u094h6cp04q26kjf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fontbonne.ley.clerc.lockbreaker",
+            "certificate_hash": "e9dd9454d5b9a40562c61ea05af80886ffb432d4"
+          }
+        },
+        {
+          "client_id": "1057306952431-6t3ctsau3kp1e26unk27gq1uchtoch58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBuLEFrGyYNO03ZlLHeNJmcCQSPi8Y34o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057306952431-6t3ctsau3kp1e26unk27gq1uchtoch58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057306952431:android:44aa0ec35efc0f24",
+        "android_client_info": {
+          "package_name": "com.fontbonne.nicolas.localproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057306952431-mffe4enl8eg473mob2m9boesqogp1j5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fontbonne.nicolas.localproject",
+            "certificate_hash": "0776373e49c20adc5f37f39e881d6f751e39e583"
+          }
+        },
+        {
           "client_id": "1057306952431-6t3ctsau3kp1e26unk27gq1uchtoch58.apps.googleusercontent.com",
           "client_type": 3
         }

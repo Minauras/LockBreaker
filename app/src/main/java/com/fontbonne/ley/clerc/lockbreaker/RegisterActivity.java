@@ -118,12 +118,17 @@ public class RegisterActivity extends AppCompatActivity {
                 // If success, return to login screen ----------------------------------------------
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Successfully registered user", Toast.LENGTH_SHORT).show();
+                    mUserProfile.uploadToFirebase();
+                    Log.d("DEBUGFIRE3","HEY1");
+
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     intent.putExtra(UserProfile.USER_PROFILE_TAG, mUserProfile);
                     setResult(AppCompatActivity.RESULT_OK, intent);
+                    Log.d("DEBUGFIRE4","HEY1");
                     finish();
 
-                // Else check errors ---------------------------------------------------------------
+
+                    // Else check errors ---------------------------------------------------------------
                 }else{
                     if (task.getException() instanceof FirebaseAuthUserCollisionException){
                         Toast.makeText(getApplicationContext(), "User already registered", Toast.LENGTH_SHORT).show();

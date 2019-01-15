@@ -60,11 +60,15 @@ public class StartGameActivity extends MiniGame{
                 startActivity(optionIntent);
             }
         });
+
+        UserProfile user = new UserProfile();
+        boolean best = user.updateScore(200);
     }
 
     private void setupGame() {
         // Add all minigames here to games
 
+        games.add(MazeControlsActivity.class);
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
         games.add(MisleadingColorsActivity.class);
@@ -72,9 +76,8 @@ public class StartGameActivity extends MiniGame{
         games.add(PerilousJourneyActivity.class);
         games.add(StepByStepActivity.class);
         games.add(SymbolsActivity.class);
-        games.add(MazeControlsActivity.class);
         games.add(InvisibleMazeActivity.class);
-        games.add(EncryptedActivity.class);*/
+        games.add(EncryptedActivity.class);
 
         // Randomize the list of games
         Collections.shuffle(games);

@@ -148,8 +148,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REGISTER_PROFILE && resultCode == RESULT_OK && data != null) {
+
             mUserProfile = (UserProfile) data.getSerializableExtra(UserProfile.USER_PROFILE_TAG);
             if (mUserProfile != null) {
                 mEmailEditText.setText(mUserProfile.email);

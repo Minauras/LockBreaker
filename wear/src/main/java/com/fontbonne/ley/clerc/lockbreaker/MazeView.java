@@ -33,7 +33,7 @@ public class MazeView extends View {
         super(context, attrs);
 
         wallPaint = new Paint();
-        wallPaint.setColor(Color.WHITE);
+        wallPaint.setColor(getResources().getColor(R.color.colorPrimary));
         wallPaint.setStrokeWidth(WALL_THICKNESS);
 
         playerPaint = new Paint();
@@ -41,7 +41,7 @@ public class MazeView extends View {
         playerPaint.setStyle(Paint.Style.FILL);
 
         exitPaint = new Paint();
-        exitPaint.setColor(Color.BLUE);
+        exitPaint.setColor(getResources().getColor(R.color.colorAccent));
 
         random = new Random();
 

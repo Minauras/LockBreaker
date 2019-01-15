@@ -6,9 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -383,7 +381,6 @@ public class CharacterView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        //canvas.drawColor(getResources().getColor(R.color.colorPrimaryDark));
         if (genre){
             float[] backhairPos = {19.426F*scale, 9.189F*scale, 123.195F*scale, 100.865F*scale};
             RectF backhairRect =  new RectF(xPos+backhairPos[0], yPos+backhairPos[1], xPos+backhairPos[2], yPos+backhairPos[3]);
@@ -476,40 +473,16 @@ public class CharacterView extends View {
         canvas.drawBitmap(eyebrows, null, eyebrowsRect, null);
 
     }
-/*
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
-        setMeasuredDimension(Math.round(maxX-minX), Math.round(maxY-minY));
-    }*/
 
-    ArrayList<Float> getTouchSurface(){
+    ArrayList<Float> getTouchSurface() {
         ArrayList<Float> out = new ArrayList<>(4);
         out.add(headLeft);
         out.add(headRight);
         out.add(headTop);
         out.add(headBottom);
-        Log.d("HEAD", String.valueOf(headLeft) + ", " + String.valueOf(headTop) +", " + String.valueOf(headRight) + ", " +String.valueOf(headBottom));
+        Log.d("HEAD", String.valueOf(headLeft) + ", " + String.valueOf(headTop) + ", " + String.valueOf(headRight) + ", " + String.valueOf(headBottom));
         Log.d("HEAD2", out.toString());
         return out;
     }
-/*
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        boolean out = super.onTouchEvent(event);
-        float x  = event.getRawX();
-        float y  = event.getRawY();
-        count += 1;
-        int action = event.getActionMasked();
-        Log.d("AZERTY", String.valueOf(action));
-        if (action == 0 && x > headLeft && x < headRight && y > headTop && y < headBottom){
-            if (isWaldo){
-                Toast.makeText(mContext, "WIN", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mContext, "LOSE", Toast.LENGTH_SHORT).show();
-            }
-        }
-        return out;
-    }*/
 }
 
