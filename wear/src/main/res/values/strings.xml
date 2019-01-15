@@ -17,4 +17,6 @@
     <string name="tab">\u0009</string>
 
     <string name="title_activity_end_screen">EndScreenActivity</string>
+
+    <string name="title_activity_watch_tutorial">WatchTutorialActivity</string>
 </resources>

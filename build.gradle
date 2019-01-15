@@ -53,6 +53,7 @@ allprojects {
                 invisible_maze_key  : "/InvisibleMaze",
                 encrypted_key       : "/Encrypted",
                 end_screen          : "/EndScreen",
+                tutorial            : "/tutorial",
         ]
     }
 }

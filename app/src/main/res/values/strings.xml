@@ -19,4 +19,6 @@
     <string name="title_activity_maze_controls">MazeControlsActivity</string>
 
     <string name="title_activity_invisible_maze">InvisibleMazeActivity</string>
+
+    <string name="title_activity_tutorial">TutorialActivity</string>
 </resources>

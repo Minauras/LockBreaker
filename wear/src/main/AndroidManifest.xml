@@ -98,7 +98,12 @@
             android:name=".EndScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_end_screen"
-            android:theme="@style/FullscreenTheme2"></activity>
+            android:theme="@style/FullscreenTheme2" />
+        <activity
+            android:name=".WatchTutorialActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_watch_tutorial"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

@@ -240,6 +240,9 @@ public class WearService extends WearableListenerService {
                     case BuildConfig.W_end_screen:
                         startIntent = new Intent(this, EndScreenActivity.class);
                         break;
+                    case BuildConfig.W_tutorial:
+                        startIntent = new Intent(this, WatchTutorialActivity.class);
+                        break;
                 }
 
                 if (startIntent == null) {

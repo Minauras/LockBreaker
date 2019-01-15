@@ -112,6 +112,7 @@ public class StartGameActivity extends MiniGame {
 
         // Add starting screen and final screen
         games.add(0, StartGameActivity.class);
+        games.add(1, TutorialActivity.class);
         games.add(FinalScreenActivity.class);
     }
 
