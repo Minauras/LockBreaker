@@ -21,6 +21,8 @@ public class StartGameActivity extends MiniGame {
     private Button mStatButton;
 
     private static final int GET_DIFFICULTY = 1;
+    private static final int minutes = 1;
+    private static final int seconds = 0;
 
 
     public static int NBRMINIGAMES = 10;
@@ -60,6 +62,10 @@ public class StartGameActivity extends MiniGame {
             @Override
             public void onClick(View view) {
                 setupGame();
+                Intent intent = new Intent(getApplicationContext(), BackgroundTimerService.class);
+                intent.putExtra(MiniGame.MIN, minutes);
+                intent.putExtra(MiniGame.SEC, seconds);
+                startService(intent);
                 initializeNextGame();
             }
         });

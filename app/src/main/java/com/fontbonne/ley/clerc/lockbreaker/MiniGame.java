@@ -1,10 +1,13 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,35 @@ import java.util.List;
  ***********************************************************************************************/
 public class MiniGame extends AppCompatActivity implements Parcelable{
 
+    public static final String MIN = "MIN";
+    public static final String SEC = "SEC";
+    public static final String UPDATETIMER = "UPDATETIMER";
+    public static final String TIMEUP = "TIMEUP";
+
+    private BroadcastReceiver mUpdateTimerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            int min = intent.getIntExtra(MIN, -1);
+            int sec = intent.getIntExtra(SEC, -1);
+            if(min != -1 || sec != -1){
+                setMin_cur(min);
+                setSec_cur(sec);
+                Log.e("PAT_LOG", "Timer Status: min: " + min + " sec: " + sec);
+            }
+            else{
+                Log.e("PAT_LOG", "ERROR receiver not correct values transmitted");
+            }
+        }
+    };
+
+    private BroadcastReceiver mTimeUpReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.e("PAT_LOG", "TIME IS UP");
+        }
+    };
+
     // General Score -------------------------------------------------------------------------------
     protected List<Class> games;
     protected Class nextGame;
@@ -30,8 +62,12 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected int totalScore;
     protected int score;
 
-    // Difficulty -------------------------------------------------------------------------------
+    // Difficulty ----------------------------------------------------------------------------------
     protected int difficulty;
+
+    // Timer Status --------------------------------------------------------------------------------
+    protected int min_cur;
+    protected int sec_cur;
 
     // Constructor ---------------------------------------------------------------------------------
     public MiniGame(List<Class> gameList, int TotScore, int difficulty) {
@@ -133,6 +169,10 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         totalScore = game.totalScore;
         difficulty = game.difficulty;
 
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateTimerReceiver, new IntentFilter(UPDATETIMER));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mTimeUpReceiver, new IntentFilter(TIMEUP));
+
     }
 
     // Parceable -----------------------------------------------------------------------------------
@@ -178,4 +218,17 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     }
 
     protected int getTotalScore() {return totalScore; }
+
+    protected void setMin_cur(int min) {min_cur = min;}
+
+    protected void setSec_cur(int sec) {sec_cur = sec;}
+
+    // onDestroy() ---------------------------------------------------------------------------------
+    @Override
+    protected void onDestroy() {
+        // Unregister since the activity is about to be closed.
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdateTimerReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mTimeUpReceiver);
+        super.onDestroy();
+    }
 }
