@@ -2,6 +2,7 @@ package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,6 +49,7 @@ public class SimilarQuizActivity extends MiniGame {
     private Button answer1;
     private Button answer2;
     private Button answer3;
+    private TextView time;
 
 
 
@@ -55,6 +57,10 @@ public class SimilarQuizActivity extends MiniGame {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_similar_quiz);
+
+        time = findViewById(R.id.timeView);
+
+
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
         switch (difficulty){
@@ -188,5 +194,12 @@ public class SimilarQuizActivity extends MiniGame {
         startService(intent);
     }
 
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
+    }
 
 }

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -28,6 +29,7 @@ public class PerilousJourneyActivity extends MiniGame {
     TextView progresstxt;
     TextView warningtxt;
     TextView scoreText;
+    private TextView time;
 
     ProgressBar distanceRun;
 
@@ -105,6 +107,8 @@ public class PerilousJourneyActivity extends MiniGame {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perilous_journey);
+
+        time = findViewById(R.id.timeView);
 
         startWatchActivity();
 
@@ -196,5 +200,13 @@ public class PerilousJourneyActivity extends MiniGame {
                 }
             }
         }, new IntentFilter(SENDINGLUXVALUE));
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
     }
 }

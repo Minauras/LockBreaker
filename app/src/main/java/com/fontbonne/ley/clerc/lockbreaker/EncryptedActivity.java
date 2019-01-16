@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +31,7 @@ public class EncryptedActivity extends MiniGame {
     private ArrayList<Character> solution_symbol = new ArrayList<>();
     private ArrayList<Character> letters = new ArrayList<>();
 
+    private TextView time;
 
     //constructors
     public EncryptedActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -43,6 +46,7 @@ public class EncryptedActivity extends MiniGame {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_encrypted);
 
         //receive last game data
         receiveLastGameData();
@@ -59,11 +63,13 @@ public class EncryptedActivity extends MiniGame {
                 break;
         }
 
-        setupGame();
+        setupGame(false);
+
+        time = findViewById(R.id.timeView);
     }
 
-    private void setupGame() {
-        setContentView(R.layout.activity_encrypted);
+    private void setupGame(boolean replay) {
+        if(replay) setContentView(R.layout.activity_encrypted);
 
         symbols.clear();
         solution.clear();
@@ -194,7 +200,7 @@ public class EncryptedActivity extends MiniGame {
                 @Override
                 public void run() {
                     //Do something after 500ms
-                    setupGame();
+                    setupGame(true);
                 }
             }, 500);
         }
@@ -237,6 +243,14 @@ public class EncryptedActivity extends MiniGame {
             }
             return json;
 
+        }
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
     }
 }

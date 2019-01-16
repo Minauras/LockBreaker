@@ -38,6 +38,7 @@ public class MisleadingColorsActivity extends MiniGame {
 
     private TextView qstLeft;
     private TextView qstRight;
+    private TextView time;
 
     private COLOR[] colorOFtext;
     private COLOR[] colorOfcolor;
@@ -54,6 +55,8 @@ public class MisleadingColorsActivity extends MiniGame {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_misleading_colors);
+
+        time = findViewById(R.id.timeView);
 
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
@@ -284,6 +287,14 @@ public class MisleadingColorsActivity extends MiniGame {
                 break;
             default:
                 Log.e("TAG_PAT", "ERROR THIS COLOR NOT KNOWN");
+        }
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
     }
 }

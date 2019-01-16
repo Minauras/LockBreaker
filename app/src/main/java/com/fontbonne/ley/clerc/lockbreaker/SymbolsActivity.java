@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ public class SymbolsActivity extends MiniGame {
     private ArrayList<Character> symbols = new ArrayList<Character>();
     private ArrayList<Integer> solution = new ArrayList<Integer>();
     private ArrayList<Character> solution_symbol = new ArrayList<Character>();
+
+    private TextView time;
 
     //constructors
     public SymbolsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -56,6 +59,7 @@ public class SymbolsActivity extends MiniGame {
 
     private void setupGame() {
         setContentView(R.layout.activity_symbols);
+        time = findViewById(R.id.timeView);
 
         symbols.clear();
         solution.clear();
@@ -161,5 +165,13 @@ public class SymbolsActivity extends MiniGame {
         }
 
         button.setEnabled(false);
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
     }
 }

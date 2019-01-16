@@ -4,12 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +21,8 @@ public class MazeControlsActivity extends MiniGame {
     public static final String WEAR_MAZE_CONTROL = "WEAR_MAZE_CONTROL";
     public static final String TURN_DATA = "TURN_DATA";
     MazeView maze;
+
+    private TextView time;
 
     //constructors
     public MazeControlsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -34,6 +38,9 @@ public class MazeControlsActivity extends MiniGame {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maze_controls);
+
+        time = findViewById(R.id.timeView);
+
 
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
@@ -77,6 +84,14 @@ public class MazeControlsActivity extends MiniGame {
         if(maze.checkWin()) {
             initializeNextGame();
             finish();
+        }
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
     }
 }

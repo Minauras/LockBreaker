@@ -97,7 +97,6 @@ public class StartGameActivity extends MiniGame {
 
     private void setupGame() {
         // Add all minigames here to games
-
         games.add(MazeControlsActivity.class);
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);

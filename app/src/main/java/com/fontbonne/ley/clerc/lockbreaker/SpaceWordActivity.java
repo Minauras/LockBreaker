@@ -1,6 +1,7 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +36,7 @@ public class SpaceWordActivity extends MiniGame {
     private String input;
     private int nbrGamesPlayed;
     private static final Random RANDOM = new Random();
+    private TextView time;
 
     // should change this to a database!
     private List<String> database = new ArrayList<String>();
@@ -44,6 +46,7 @@ public class SpaceWordActivity extends MiniGame {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_space_word);
 
+        time = findViewById(R.id.timeView);
         editText = findViewById(R.id.editText);
         btnCheck = findViewById(R.id.button);
         nbrLettersText = findViewById(R.id.nbrLettersTextView);
@@ -115,4 +118,11 @@ public class SpaceWordActivity extends MiniGame {
         database.add("Garage");
     }
 
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
+    }
 }

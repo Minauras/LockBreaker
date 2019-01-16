@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class StepByStepActivity extends MiniGame {
     int step_size = 100;
     ImageView godzillaImageView;
     ImageView japanImageView;
+    private TextView time;
 
     float dpHeight;
     float dpWidth;
@@ -74,6 +77,8 @@ public class StepByStepActivity extends MiniGame {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_by_step);
+
+        time = findViewById(R.id.timeView);
 
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
@@ -166,5 +171,13 @@ public class StepByStepActivity extends MiniGame {
         intent.setAction(WearService.ACTION_SEND.STEP.name());
         intent.putExtra(WearService.STEPCOUNT, step);
         startService(intent);
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
     }
 }

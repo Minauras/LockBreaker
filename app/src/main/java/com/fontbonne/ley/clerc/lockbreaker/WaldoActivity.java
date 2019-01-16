@@ -1,6 +1,7 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     String waldosName = "";
     ArrayList<ArrayList<Float>> touchSurfaces;
     int waldoIdx;
+    private TextView time;
 
     public WaldoActivity(List<Class> gameActivity, int totscore, int difficulty , int gameStatus) {
         super(gameActivity, totscore, difficulty, gameStatus);
@@ -38,6 +41,8 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waldo);
+
+        time = findViewById(R.id.timeView);
 
         receiveLastGameData();
         switch (difficulty){
@@ -139,5 +144,13 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
         intent.setAction(WearService.ACTION_SEND.WALDO.name());
         intent.putExtra(WearService.WALDO, waldosName);
         startService(intent);
+    }
+
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
     }
 }

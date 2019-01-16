@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TutorialActivity extends MiniGame {
 
-    private static final int minutes = 0;
+    private static final int minutes = 1;
     private static final int seconds = 10;
 
     //constructors

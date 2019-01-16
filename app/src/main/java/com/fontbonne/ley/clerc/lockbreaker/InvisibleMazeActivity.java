@@ -1,9 +1,11 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
 public class InvisibleMazeActivity extends MiniGame {
 
     MazeView maze;
-
+    private TextView time;
 
     //constructors
     public InvisibleMazeActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -28,6 +30,8 @@ public class InvisibleMazeActivity extends MiniGame {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invisible_maze);
+
+        time = findViewById(R.id.timeView);
 
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
@@ -90,4 +94,11 @@ public class InvisibleMazeActivity extends MiniGame {
         }
     }
 
+    @Override
+    public void callbackTimer(){
+        if(time != null){
+            if(min_cur == 0) time.setTextColor(Color.RED);
+            time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
+        }
+    }
 }
