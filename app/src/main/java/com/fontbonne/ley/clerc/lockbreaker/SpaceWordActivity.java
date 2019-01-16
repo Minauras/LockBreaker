@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,6 +48,9 @@ public class SpaceWordActivity extends MiniGame {
     private static final Random RANDOM = new Random();
     private TextView time;
 
+    MediaPlayer playercorrect;
+    MediaPlayer playerwrong;
+
     // should change this to a database!
     private List<String> database = new ArrayList<String>();
 
@@ -57,6 +65,10 @@ public class SpaceWordActivity extends MiniGame {
         nbrLettersText = findViewById(R.id.nbrLettersTextView);
 
         receiveLastGameData();
+
+        playercorrect = MediaPlayer.create(this, R.raw.correctsfx);
+        playerwrong = MediaPlayer.create(this, R.raw.wrongsfx);
+
         Log.d("DIFFICULTY", String.valueOf(difficulty));
         switch (difficulty){
             case 0:
@@ -75,7 +87,7 @@ public class SpaceWordActivity extends MiniGame {
                 amountScore = 100;
                 break;
         }
-        databaseStuff();
+        make_database();
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,11 +98,13 @@ public class SpaceWordActivity extends MiniGame {
                         Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                         Toast.makeText(SpaceWordActivity.this,
                                 "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
+                        playercorrect.start();
                         addtoScore(amountScore);
                     } else {
                         Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
                         Toast.makeText(SpaceWordActivity.this,
                                 "THIS IS WRONG!", Toast.LENGTH_SHORT).show();
+                        playerwrong.start();
                     }
                     nbrGamesPlayed++;
                     if (nbrGamesPlayed < gamesToPlay) setupGame();
@@ -118,15 +132,6 @@ public class SpaceWordActivity extends MiniGame {
         intent.putExtra(WearService.MESSAGE, answer);
         intent.putExtra(WearService.PATH, BuildConfig.W_space_word_answer);
         startService(intent);
-    }
-
-    private void databaseStuff() {
-        database.add("Hello");
-        database.add("Dark");
-        database.add("Friend");
-        database.add("Again");
-        database.add("Siesta");
-        database.add("Garage");
     }
 
     @Override
@@ -181,4 +186,37 @@ public class SpaceWordActivity extends MiniGame {
         }
         super.onResume();
     }
+
+    private void make_database(){
+        String json = loadJSONFromAsset(this);
+        try {
+            JSONObject reader = new JSONObject(json);
+            int nbwords = reader.getInt("nb");
+
+            for(int i = 0; i < nbwords; i++){
+                String idx = ("w" + i);
+                database.add(reader.getString(idx));
+            }
+        } catch (Exception e) {
+            database.add("Error");
+        }
+    }
+
+    private String loadJSONFromAsset(Context context) {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open("spaceword.json");
+
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
 }

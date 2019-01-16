@@ -58,10 +58,6 @@ public class FinalScreenActivity extends MiniGame {
         mPlayAgainButton = (Button) findViewById(R.id.playAgainButton);
         Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
         stopService(intentmusic);
-        MediaPlayer player = MediaPlayer.create(this, R.raw.lockbreakermainscreen);
-        player.setLooping(true); // Set looping
-        player.setVolume(100,100);
-        player.start();
 
         receiveLastGameData();
 
@@ -114,29 +110,5 @@ public class FinalScreenActivity extends MiniGame {
         intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_end_screen);
         startService(intent);
     }
-
-    @Override
-    protected void onPause() {
-        if (this.isFinishing()){ //basically BACK was pressed from this activity
-
-            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
-        }
-        Context context = getApplicationContext();
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
-        if (!taskInfo.isEmpty()) {
-            ComponentName topActivity = taskInfo.get(0).topActivity;
-            if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
-                stopService(intentmusic);
-                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
-            }
-            else {
-                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
-            }
-        }
-        super.onPause();
-    }
-
 
 }

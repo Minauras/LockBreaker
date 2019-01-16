@@ -55,16 +55,26 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
         playercorrect = MediaPlayer.create(this, R.raw.correctsfx);
         playerwrong = MediaPlayer.create(this, R.raw.wrongsfx);
 
+        float scale = 1.5F;
+        int nbx = 5;
+        int nby = 5;
+
         receiveLastGameData();
         switch (difficulty){
             case 0:
-                //easy
+                scale = 1.5F;
+                nbx = 5;
+                nby = 5;
                 break;
             case 1:
-                // medium
+                scale = 1.5F;
+                nbx = 5;
+                nby = 5;
                 break;
             case 2:
-                // hard
+                scale = 1F;
+                nbx = 8;
+                nby = 8;
                 break;
         }
 
@@ -74,8 +84,7 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
         float width = (float)size.x;
         float height = (float)size.y;
 
-        int nbx = 5;
-        int nby = 5;
+
         touchSurfaces = new ArrayList<ArrayList<Float>>(nbx*nby);
 
         // at scale 1 ~ (150, 300) => 2 ~ (300, 600)
@@ -101,9 +110,11 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
                 String name =  now.toString() + ", " + String.valueOf(i)+ ", " + String.valueOf(j);
                 if (i*nbx+j == waldoIdx){
                     waldosName = name;
-                    mCharacter = new CharacterView(this, x, y,2L, name, true);
+                    mCharacter = new CharacterView(this, x, y,scale, name, true);
+
                 }else{
-                    mCharacter = new CharacterView(this, x, y,2L, name, false);
+                    mCharacter = new CharacterView(this, x, y,scale, name, true);
+
                 }
                 touchSurfaces.add(mCharacter.getTouchSurface());
                 Log.d("CHARLIE", touchSurfaces.toString());
@@ -135,18 +146,18 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
             if (action == 0 && x > touchSurfaces.get(i).get(0) && x < touchSurfaces.get(i).get(1)  && y > touchSurfaces.get(i).get(2)  && y < touchSurfaces.get(i).get(3) ){
 
                 if (i == waldoIdx){
-                    //thruthClick = true;
+                    score += 300;
                     playercorrect.start();
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                        initializeNextGame();
-                        finish();
+                            initializeNextGame();
+                            finish();
                         }
                     }, 500);
                 }else{
-                    //thruthClick = false;
+                    score -= 100;
                     playerwrong.start();
                     Toast.makeText(this, "LOSE", Toast.LENGTH_SHORT).show();
                 }

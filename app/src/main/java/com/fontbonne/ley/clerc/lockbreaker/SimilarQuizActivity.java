@@ -106,7 +106,7 @@ public class SimilarQuizActivity extends MiniGame {
             Set<Integer> generated = new LinkedHashSet<Integer>();
             while (generated.size() < NB_QUESTIONS)
             {
-                Integer next = rand.nextInt(numbersNeeded) + 1;
+                Integer next = rand.nextInt(numbersNeeded);
                 // As we're adding to a set, this will automatically do a containment check
                 generated.add(next);
             }
@@ -165,10 +165,14 @@ public class SimilarQuizActivity extends MiniGame {
         }
         if (solFound == questions[currentQuestion].getThruth()){
             playercorrect.start();
+
+            addtoScore(300/NB_QUESTIONS);
             currentQuestion += 1;
             updateLayout(currentQuestion);
         }else{
             playerwrong.start();
+            addtoScore(-100/NB_QUESTIONS);
+            //Toast.makeText(this,"WRONG !", Toast.LENGTH_LONG).show();
         }
     }
 

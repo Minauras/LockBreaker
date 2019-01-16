@@ -94,7 +94,7 @@ public class StepByStepActivity extends MiniGame {
         switch (difficulty){
             case 0:
                 //easy
-                step_size = (int)(dpHeight/40);
+                step_size = (int)(dpHeight/20);
                 break;
             case 1:
                 // medium
@@ -102,7 +102,7 @@ public class StepByStepActivity extends MiniGame {
                 break;
             case 2:
                 // hard
-                step_size = (int)(dpHeight/20);
+                step_size = (int)(dpHeight/40);
                 break;
         }
         japanImageView = findViewById(R.id.japanImageView);
