@@ -27,8 +27,8 @@ public class StartGameActivity extends MiniGame {
     private int nbrGames = 1;
 
 
-    public StartGameActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public StartGameActivity(List<Class> gameActivity, int totscore, int difficulty) {
+        super(gameActivity, totscore, difficulty);
     }
 
     public StartGameActivity() {

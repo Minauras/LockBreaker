@@ -23,8 +23,8 @@ public class SymbolsActivity extends MiniGame {
     private ArrayList<Character> solution_symbol = new ArrayList<Character>();
 
     //constructors
-    public SymbolsActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public SymbolsActivity(List<Class> gameActivity, int totscore, int difficulty) {
+        super(gameActivity, totscore, difficulty);
     }
 
     public SymbolsActivity() {
@@ -37,6 +37,19 @@ public class SymbolsActivity extends MiniGame {
 
         //receive last game data
         receiveLastGameData();
+
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         setupGame();
     }

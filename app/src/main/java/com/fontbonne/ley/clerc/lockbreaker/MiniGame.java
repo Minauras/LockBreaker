@@ -31,14 +31,15 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected int score;
 
     // Difficulty -------------------------------------------------------------------------------
-    protected int difficulty = 1;
+    protected int difficulty;
 
     // Constructor ---------------------------------------------------------------------------------
-    public MiniGame(List<Class> gameList, int TotScore) {
+    public MiniGame(List<Class> gameList, int TotScore, int difficulty) {
         games = gameList;
         nextGame = null;
         totalScore = TotScore;
         score = 0;
+        this.difficulty = difficulty;
     }
 
     public MiniGame(){
@@ -46,12 +47,14 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         nextGame = null;
         totalScore = 0;
         score = 0;
+        difficulty = 1;
     }
 
     protected MiniGame copy(){
         MiniGame copied = new MiniGame();
         copied.games = games;
         copied.totalScore = totalScore;
+        copied.difficulty = difficulty;
         return copied;
     }
 
@@ -67,7 +70,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         try {
 
             nextGameConstructor = nextGame.getConstructors();
-            nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore });
+            nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore, difficulty });
             nextGameMethod = nextGameObj.getClass().getMethod("startGame", Context.class);
             nextGameMethod.invoke(nextGameObj, getApplicationContext());
         } catch (IllegalAccessException e) {
@@ -128,6 +131,8 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
 
         games = game.games;
         totalScore = game.totalScore;
+        difficulty = game.difficulty;
+
     }
 
     // Parceable -----------------------------------------------------------------------------------
@@ -139,6 +144,8 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     public void writeToParcel(Parcel out, int flags) {
         out.writeList(games);
         out.writeInt(totalScore);
+        out.writeInt(difficulty);
+
     }
 
     public static final Parcelable.Creator<MiniGame> CREATOR
@@ -157,6 +164,8 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         in.readList(temp, null);
         games = temp;
         totalScore = in.readInt();
+        difficulty = in.readInt();
+
     }
 
     // Getter and Setters --------------------------------------------------------------------------

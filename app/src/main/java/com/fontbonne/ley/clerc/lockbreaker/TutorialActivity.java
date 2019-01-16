@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -15,8 +16,8 @@ import java.util.List;
 public class TutorialActivity extends MiniGame {
 
     //constructors
-    public TutorialActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public TutorialActivity(List<Class> gameActivity, int totscore, int difficulty) {
+        super(gameActivity, totscore, difficulty);
     }
 
     public TutorialActivity() {
@@ -29,7 +30,20 @@ public class TutorialActivity extends MiniGame {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
 
-        receiveLastGameData();        
+        receiveLastGameData();
+
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
         
         startWatch();
     }

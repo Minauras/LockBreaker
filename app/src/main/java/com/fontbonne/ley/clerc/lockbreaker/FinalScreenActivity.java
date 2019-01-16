@@ -35,7 +35,8 @@ public class FinalScreenActivity extends MiniGame {
     private Button mPlayAgainButton;
 
 
-    public FinalScreenActivity(List<Class> gameActivity, int totscore) { super(gameActivity, totscore); }
+    public FinalScreenActivity(List<Class> gameActivity, int totscore, int difficulty) {
+        super(gameActivity, totscore, difficulty); }
 
     public FinalScreenActivity(){ super(); }
 
@@ -54,6 +55,18 @@ public class FinalScreenActivity extends MiniGame {
         mPlayAgainButton = (Button) findViewById(R.id.playAgainButton);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         String message;
         //totalScore = 19;

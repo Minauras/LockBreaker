@@ -19,8 +19,8 @@ import java.util.Random;
 
 public class SpaceWordActivity extends MiniGame {
 
-    public SpaceWordActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public SpaceWordActivity(List<Class> gameActivity, int totscore, int difficulty) {
+        super(gameActivity, totscore, difficulty);
     }
     public SpaceWordActivity() {
         super();
@@ -49,6 +49,18 @@ public class SpaceWordActivity extends MiniGame {
         nbrLettersText = findViewById(R.id.nbrLettersTextView);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
         databaseStuff();
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
