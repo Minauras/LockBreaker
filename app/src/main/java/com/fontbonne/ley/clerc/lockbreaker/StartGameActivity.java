@@ -23,7 +23,7 @@ public class StartGameActivity extends MiniGame {
     private static final int GET_DIFFICULTY = 1;
 
 
-    private static int NBRMINIGAMES = 1;
+    public static int NBRMINIGAMES = 10;
     private int nbrGames = 1;
 
 
@@ -55,11 +55,11 @@ public class StartGameActivity extends MiniGame {
         mStatButton = findViewById(R.id.statButton);
 
 
-        setupGame();
 
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setupGame();
                 initializeNextGame();
             }
         });
@@ -69,6 +69,8 @@ public class StartGameActivity extends MiniGame {
             public void onClick(View view) {
                 Intent optionIntent = new Intent(StartGameActivity.this, OptionActivity.class);
                 optionIntent.putExtra(OptionActivity.DIFFICULTY_TAG, difficulty);
+                optionIntent.putExtra(OptionActivity.NUMBER_TAG, nbrGames);
+
                 startActivityForResult(optionIntent, GET_DIFFICULTY);
             }
         });
@@ -134,7 +136,11 @@ public class StartGameActivity extends MiniGame {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_DIFFICULTY && resultCode == RESULT_OK && data != null) {
             difficulty = (int) data.getIntExtra(OptionActivity.DIFFICULTY_TAG,1);
-            Log.d("DEBUGNICO",String.valueOf(difficulty));
+            nbrGames = (int) data.getIntExtra(OptionActivity.NUMBER_TAG,1);
+
+            Log.d("DEBUGNICO1",String.valueOf(difficulty));
+            Log.d("DEBUGNICO2",String.valueOf(nbrGames));
+
 
         }
     }

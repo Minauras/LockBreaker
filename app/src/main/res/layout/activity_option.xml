@@ -97,6 +97,22 @@
 
 
             </RadioGroup>
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:padding="14dp"
+                android:shadowDy="2"
+                android:shadowRadius="5"
+                android:text="Number of minigame per parties"
+                android:textColorHint="@color/colorPrimary"/>
+            <NumberPicker
+                android:layout_gravity="center"
+                android:id="@+id/numberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/user"
@@ -121,7 +137,6 @@
                 android:padding="18dp"
                 android:textSize="18sp"
                 android:text="Sign Out"/>
-
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
