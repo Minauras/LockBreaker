@@ -1,8 +1,13 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +34,9 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     int waldoIdx;
     private TextView time;
 
+    MediaPlayer playercorrect;
+    MediaPlayer playerwrong;
+
     public WaldoActivity(List<Class> gameActivity, int totscore, int difficulty , int gameStatus) {
         super(gameActivity, totscore, difficulty, gameStatus);
     }
@@ -43,6 +51,9 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
         setContentView(R.layout.activity_waldo);
 
         time = findViewById(R.id.timeView);
+
+        playercorrect = MediaPlayer.create(this, R.raw.correctsfx);
+        playerwrong = MediaPlayer.create(this, R.raw.wrongsfx);
 
         receiveLastGameData();
         switch (difficulty){
@@ -125,11 +136,18 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
 
                 if (i == waldoIdx){
                     //thruthClick = true;
-                    Toast.makeText(this, "WIN", Toast.LENGTH_SHORT).show();
-                    initializeNextGame();
-                    finish();
+                    playercorrect.start();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                        initializeNextGame();
+                        finish();
+                        }
+                    }, 500);
                 }else{
                     //thruthClick = false;
+                    playerwrong.start();
                     Toast.makeText(this, "LOSE", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -153,4 +171,51 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
             time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
     }
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+                stopService(intentmusic);
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+                startService(intentmusic);
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onResume();
+    }
+
+
 }

@@ -1,5 +1,8 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.ybs.countrypicker.CountryPicker;
 import com.ybs.countrypicker.CountryPickerListener;
+
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -151,5 +156,51 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                stopService(intentmusic);
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                startService(intentmusic);
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onResume();
     }
 }

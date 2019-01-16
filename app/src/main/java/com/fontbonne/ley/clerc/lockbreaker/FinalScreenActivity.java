@@ -1,5 +1,7 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -62,18 +64,6 @@ public class FinalScreenActivity extends MiniGame {
         player.start();
 
         receiveLastGameData();
-        Log.d("DIFFICULTY", String.valueOf(difficulty));
-        switch (difficulty){
-            case 0:
-                //easy
-                break;
-            case 1:
-                // medium
-                break;
-            case 2:
-                // hard
-                break;
-        }
 
         String message;
 
@@ -124,4 +114,29 @@ public class FinalScreenActivity extends MiniGame {
         intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_end_screen);
         startService(intent);
     }
+
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                stopService(intentmusic);
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onPause();
+    }
+
+
 }

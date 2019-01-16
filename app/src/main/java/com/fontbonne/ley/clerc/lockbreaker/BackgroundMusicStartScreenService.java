@@ -14,15 +14,15 @@ public class BackgroundMusicStartScreenService extends Service {
     public void onCreate() {
         Log.e("PAT_LOG", "onCreate MUSIC");
         super.onCreate();
+        player = MediaPlayer.create(this, R.raw.lockbreakermainscreen);
+        player.setLooping(true); // Set looping
+        player.setVolume(100,100);
+        player.start();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e("PAT_LOG", "onStart MUSIC");
-        player = MediaPlayer.create(this, R.raw.lockbreakermainscreen);
-        player.setLooping(true); // Set looping
-        player.setVolume(100,100);
-        player.start();
         // If we get killed, after returning from here, restart
         return START_STICKY;
     }

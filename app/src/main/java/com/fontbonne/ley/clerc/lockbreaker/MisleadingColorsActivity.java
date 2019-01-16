@@ -1,7 +1,11 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +56,9 @@ public class MisleadingColorsActivity extends MiniGame {
     private int amountScore;
     private boolean gamemode;
 
+    MediaPlayer playercorrect;
+    MediaPlayer playerwrong;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,19 +98,20 @@ public class MisleadingColorsActivity extends MiniGame {
         qstLeft = findViewById(R.id.QuestionTextView);
         qstRight = findViewById(R.id.QuestionColorView);
 
+        playercorrect = MediaPlayer.create(this, R.raw.correctsfx);
+        playerwrong = MediaPlayer.create(this, R.raw.wrongsfx);
+
         btnTL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(answer == 0) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(amountScore);
+                    playercorrect.start();
                 }
                 else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                    playerwrong.start();
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<gamesToPlay)setupGame();
@@ -119,14 +127,12 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 1) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(amountScore);
+                    playercorrect.start();
                 }
                 else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
-                    Toast.makeText(MisleadingColorsActivity.this,
-                        "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                    playerwrong.start();
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<gamesToPlay)setupGame();
@@ -142,14 +148,12 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 2){
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
                     addtoScore(amountScore);
+                    playercorrect.start();
                 }
                 else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                    playerwrong.start();
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<gamesToPlay)setupGame();
@@ -165,14 +169,12 @@ public class MisleadingColorsActivity extends MiniGame {
             public void onClick(View view) {
                 if(answer == 3) {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
+                    playercorrect.start();
                     addtoScore(amountScore);
                 }
                 else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
-                    Toast.makeText(MisleadingColorsActivity.this,
-                            "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
+                    playerwrong.start();
                 }
                 nbrGamesPlayed++;
                 if(nbrGamesPlayed<gamesToPlay)setupGame();
@@ -304,5 +306,50 @@ public class MisleadingColorsActivity extends MiniGame {
             if(min_cur == 0) time.setTextColor(Color.RED);
             time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
+    }
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+                stopService(intentmusic);
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+                startService(intentmusic);
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onResume();
     }
 }

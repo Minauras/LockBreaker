@@ -1,7 +1,10 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,8 +29,8 @@ public class StartGameActivity extends MiniGame {
     private static final int GET_DIFFICULTY = 1;
 
 
-    public static int NBRMINIGAMES = 9;
-    private int nbrGames = 9;
+    public static int NBRMINIGAMES = 10;
+    private int nbrGames = 10;
 
 
     public StartGameActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -48,6 +54,8 @@ public class StartGameActivity extends MiniGame {
         }
 
         setContentView(R.layout.activity_start_game);
+        Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+        stopService(intentmusic);
 
 
         mStartButton = findViewById(R.id.playButton);
@@ -59,6 +67,7 @@ public class StartGameActivity extends MiniGame {
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mStartButton.setEnabled(false);
                 setupGame();
                 Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
                 stopService(intentmusic);
@@ -91,17 +100,10 @@ public class StartGameActivity extends MiniGame {
         sendStart();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        //restart home screen when going back to home screen
-        sendStart();
-    }
-
 
     private void setupGame() {
         // Add all minigames here to games
+        games.clear();
         games.add(MazeControlsActivity.class);
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
@@ -123,7 +125,7 @@ public class StartGameActivity extends MiniGame {
 
         // Add starting screen and final screen
         games.add(0, StartGameActivity.class);
-        games.add(1, TutorialActivity.class);games.add(SimilarQuizActivity.class);
+        games.add(1, TutorialActivity.class);
         games.add(FinalScreenActivity.class);
     }
 
@@ -147,5 +149,54 @@ public class StartGameActivity extends MiniGame {
 
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                stopService(intentmusic);
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        if (this.isFinishing()){ //basically BACK was pressed from this activity
+
+            Log.e("TAG_PAT", "YOU PRESSED BACK FROM YOUR 'HOME/MAIN' ACTIVITY");
+        }
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                Log.e("TAG_PAT", "YOU LEFT YOUR APP");
+            }
+            else {
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                startService(intentmusic);
+                Log.e("TAG_PAT", "YOU SWITCHED ACTIVITIES WITHIN YOUR APP");
+            }
+        }
+        mStartButton.setEnabled(true);
+        //restart home screen when going back to home screen
+        sendStart();
+        super.onResume();
     }
 }
