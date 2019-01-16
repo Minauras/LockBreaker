@@ -45,6 +45,7 @@ public class PerilousJourneyActivity extends MiniGame {
     boolean first_time;
     int Distance_to_run = 200;
     int progress_running = 0;
+    int dragonPower;
 
     //runs without a timer by reposting this handler at the end of the runnable
     Handler timerHandler = new Handler();
@@ -70,7 +71,7 @@ public class PerilousJourneyActivity extends MiniGame {
             progresstxt.setText(String.valueOf(progress_running));
             if(dragon_fly_by){
                 dragon_fly_by_count += 1;
-                if(is_running) score -= 10;
+                if(is_running) score -= dragonPower;
             }
             scoreText.setText(String.valueOf(score));
             if(dragon_fly_by_count >= 15) {
@@ -120,12 +121,15 @@ public class PerilousJourneyActivity extends MiniGame {
         switch (difficulty){
             case 0:
                 //easy
+                dragonPower = 5;
                 break;
             case 1:
                 // medium
+                dragonPower = 10;
                 break;
             case 2:
                 // hard
+                dragonPower = 25;
                 break;
         }
 

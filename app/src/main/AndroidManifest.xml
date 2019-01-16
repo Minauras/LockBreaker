@@ -79,6 +79,8 @@
             </intent-filter>
         </service>
         <service android:name=".BackgroundTimerService"></service>
+        <service android:name=".BackgroundMusicGameService"></service>
+        <service android:name=".BackgroundMusicStartScreenService"></service>
 
         <activity
             android:name=".SpaceWordActivity"

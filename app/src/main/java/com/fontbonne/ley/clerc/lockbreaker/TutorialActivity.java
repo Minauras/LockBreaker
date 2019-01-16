@@ -1,6 +1,7 @@
 package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class TutorialActivity extends MiniGame {
 
     private static final int minutes = 1;
     private static final int seconds = 10;
+    private boolean service_running;
 
     //constructors
     public TutorialActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -60,7 +62,8 @@ public class TutorialActivity extends MiniGame {
 
 
     public void startButtonCallback(View view) {
-        Intent intent = new Intent(getApplicationContext(), BackgroundTimerService.class);
+        Intent intent = new Intent(TutorialActivity.this, BackgroundTimerService.class);
+        stopService(intent);
         intent.putExtra(MiniGame.MIN, minutes);
         intent.putExtra(MiniGame.SEC, seconds);
         startService(intent);

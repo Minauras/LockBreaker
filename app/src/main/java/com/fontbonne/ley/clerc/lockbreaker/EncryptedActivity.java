@@ -63,13 +63,14 @@ public class EncryptedActivity extends MiniGame {
                 break;
         }
 
-        setupGame(false);
+        setupGame();
 
-        time = findViewById(R.id.timeView);
+
     }
 
-    private void setupGame(boolean replay) {
-        if(replay) setContentView(R.layout.activity_encrypted);
+    private void setupGame() {
+        setContentView(R.layout.activity_encrypted);
+        time = findViewById(R.id.timeView);
 
         symbols.clear();
         solution.clear();
@@ -200,7 +201,7 @@ public class EncryptedActivity extends MiniGame {
                 @Override
                 public void run() {
                     //Do something after 500ms
-                    setupGame(true);
+                    setupGame();
                 }
             }, 500);
         }

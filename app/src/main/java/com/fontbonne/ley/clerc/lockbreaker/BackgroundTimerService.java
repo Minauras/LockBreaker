@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -11,14 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class BackgroundTimerService extends IntentService {
-
-    public BackgroundTimerService(String name) {
-        super(name);
-    }
-    public BackgroundTimerService () {
-        super("MyServerOrWhatever");
-    }
+public class BackgroundTimerService extends Service {
 
     int sec;
     int min;
@@ -61,15 +55,34 @@ public class BackgroundTimerService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent workIntent) {
+    public void onCreate() {
+        Log.e("PAT_LOG", "onCreate MUSIC");
+        super.onCreate();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         //get the mins and secs when started
-        min = workIntent.getIntExtra(MiniGame.MIN, -1);
-        sec = workIntent.getIntExtra(MiniGame.SEC, -1);
+        min = intent.getIntExtra(MiniGame.MIN, -1);
+        sec = intent.getIntExtra(MiniGame.SEC, -1);
         if(min != -1 || sec != -1){
             timerHandler.postDelayed(timerRunnable, 0);
         }
         else{
             Log.e("PAT_LOG", "ERROR Service started but not initialized correctly");
         }
+        return START_NOT_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // We don't provide binding, so return null
+        return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e("TAG_PAT", "onDESTROY");
+        timerHandler.removeCallbacks(timerRunnable);
     }
 }

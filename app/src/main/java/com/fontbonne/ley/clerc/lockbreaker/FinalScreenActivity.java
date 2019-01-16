@@ -2,6 +2,7 @@ package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,12 @@ public class FinalScreenActivity extends MiniGame {
 
         mMenuButton = (Button) findViewById(R.id.menuButton);
         mPlayAgainButton = (Button) findViewById(R.id.playAgainButton);
+        Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+        stopService(intentmusic);
+        MediaPlayer player = MediaPlayer.create(this, R.raw.lockbreakermainscreen);
+        player.setLooping(true); // Set looping
+        player.setVolume(100,100);
+        player.start();
 
         receiveLastGameData();
         Log.d("DIFFICULTY", String.valueOf(difficulty));
@@ -69,7 +76,6 @@ public class FinalScreenActivity extends MiniGame {
         }
 
         String message;
-        //totalScore = 19;
 
         Log.e("NICOLAS", String.valueOf(gameLost));
 

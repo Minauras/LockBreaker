@@ -35,6 +35,8 @@ public class SpaceWordActivity extends MiniGame {
     String[] letters;
     private String input;
     private int nbrGamesPlayed;
+    private int gamesToPlay;
+    private int amountScore;
     private static final Random RANDOM = new Random();
     private TextView time;
 
@@ -55,13 +57,19 @@ public class SpaceWordActivity extends MiniGame {
         Log.d("DIFFICULTY", String.valueOf(difficulty));
         switch (difficulty){
             case 0:
-                //easy
+                //easy DOESNT EXIST
+                gamesToPlay = 1;
+                amountScore = 300;
                 break;
             case 1:
                 // medium
+                gamesToPlay = 2;
+                amountScore = 150;
                 break;
             case 2:
                 // hard
+                gamesToPlay = 4;
+                amountScore = 100;
                 break;
         }
         databaseStuff();
@@ -75,14 +83,14 @@ public class SpaceWordActivity extends MiniGame {
                         Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                         Toast.makeText(SpaceWordActivity.this,
                                 "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
-                        addtoScore(100);
+                        addtoScore(amountScore);
                     } else {
                         Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
                         Toast.makeText(SpaceWordActivity.this,
                                 "THIS IS WRONG!", Toast.LENGTH_SHORT).show();
                     }
                     nbrGamesPlayed++;
-                    if (nbrGamesPlayed < 3) setupGame();
+                    if (nbrGamesPlayed < gamesToPlay) setupGame();
                     else{
                         initializeNextGame();
                         finish();

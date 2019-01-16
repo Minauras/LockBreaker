@@ -48,6 +48,8 @@ public class MisleadingColorsActivity extends MiniGame {
     private COLOR answerColor;
 
     private int nbrGamesPlayed;
+    private int gamesToPlay;
+    private int amountScore;
     private boolean gamemode;
 
     @Override
@@ -63,12 +65,18 @@ public class MisleadingColorsActivity extends MiniGame {
         switch (difficulty){
             case 0:
                 //easy
+                gamesToPlay = 2;
+                amountScore = 150;
                 break;
             case 1:
                 // medium
+                gamesToPlay = 3;
+                amountScore = 100;
                 break;
             case 2:
                 // hard
+                gamesToPlay = 5;
+                amountScore = 60;
                 break;
         }
 
@@ -90,7 +98,7 @@ public class MisleadingColorsActivity extends MiniGame {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                     Toast.makeText(MisleadingColorsActivity.this,
                             "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
-                    addtoScore(100);
+                    addtoScore(amountScore);
                 }
                 else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
@@ -98,7 +106,7 @@ public class MisleadingColorsActivity extends MiniGame {
                             "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
                 }
                 nbrGamesPlayed++;
-                if(nbrGamesPlayed<3)setupGame();
+                if(nbrGamesPlayed<gamesToPlay)setupGame();
                 else{
                     initializeNextGame();
                     finish();
@@ -113,7 +121,7 @@ public class MisleadingColorsActivity extends MiniGame {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                     Toast.makeText(MisleadingColorsActivity.this,
                             "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
-                    addtoScore(100);
+                    addtoScore(amountScore);
                 }
                 else{
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
@@ -121,7 +129,7 @@ public class MisleadingColorsActivity extends MiniGame {
                         "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
                 }
                 nbrGamesPlayed++;
-                if(nbrGamesPlayed<3)setupGame();
+                if(nbrGamesPlayed<gamesToPlay)setupGame();
                 else{
                     initializeNextGame();
                     finish();
@@ -136,7 +144,7 @@ public class MisleadingColorsActivity extends MiniGame {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                     Toast.makeText(MisleadingColorsActivity.this,
                             "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
-                    addtoScore(100);
+                    addtoScore(amountScore);
                 }
                 else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
@@ -144,7 +152,7 @@ public class MisleadingColorsActivity extends MiniGame {
                             "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
                 }
                 nbrGamesPlayed++;
-                if(nbrGamesPlayed<3)setupGame();
+                if(nbrGamesPlayed<gamesToPlay)setupGame();
                 else{
                     initializeNextGame();
                     finish();
@@ -159,7 +167,7 @@ public class MisleadingColorsActivity extends MiniGame {
                     Log.e("TAG_RESULTS", "THIS IS CORRECT!!");
                     Toast.makeText(MisleadingColorsActivity.this,
                             "THIS IS CORRECT!!", Toast.LENGTH_SHORT).show();
-                    addtoScore(100);
+                    addtoScore(amountScore);
                 }
                 else {
                     Log.e("TAG_RESULTS", "THIS IS WRONG! Answer is " + answer);
@@ -167,7 +175,7 @@ public class MisleadingColorsActivity extends MiniGame {
                             "THIS IS WRONG!!", Toast.LENGTH_SHORT).show();
                 }
                 nbrGamesPlayed++;
-                if(nbrGamesPlayed<3)setupGame();
+                if(nbrGamesPlayed<gamesToPlay)setupGame();
                 else {
                     initializeNextGame();
                     finish();

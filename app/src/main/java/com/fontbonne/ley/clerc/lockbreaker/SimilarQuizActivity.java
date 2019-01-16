@@ -121,7 +121,7 @@ public class SimilarQuizActivity extends MiniGame {
 
         if (questionId < NB_QUESTIONS){
 
-            Log.d("AZERTY", questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
+            //Log.d("AZERTY", questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
             startWatchActivity(questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
 
             questionTextView.setText(questions[questionId].getQuestion());

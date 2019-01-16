@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mLogo = (ImageView) findViewById(R.id.logoView);
+        Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+        startService(intentmusic);
         mScreen = (RelativeLayout) findViewById(R.id.screen);
         mScreen.setOnClickListener(new View.OnClickListener() {
             @Override

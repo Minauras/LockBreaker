@@ -60,6 +60,11 @@ public class StartGameActivity extends MiniGame {
             @Override
             public void onClick(View view) {
                 setupGame();
+                Intent intentmusic = new Intent(getApplicationContext(), BackgroundMusicStartScreenService.class);
+                stopService(intentmusic);
+                intentmusic = new Intent(getApplicationContext(), BackgroundMusicGameService.class);
+                stopService(intentmusic);
+                startService(intentmusic);
                 initializeNextGame();
             }
         });
@@ -101,7 +106,7 @@ public class StartGameActivity extends MiniGame {
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
         games.add(MisleadingColorsActivity.class);
-        //games.add(SpaceWordActivity.class);
+        games.add(SpaceWordActivity.class);
         games.add(PerilousJourneyActivity.class);
         games.add(StepByStepActivity.class);
         games.add(SymbolsActivity.class);
@@ -118,7 +123,7 @@ public class StartGameActivity extends MiniGame {
 
         // Add starting screen and final screen
         games.add(0, StartGameActivity.class);
-        games.add(1, TutorialActivity.class);
+        games.add(1, TutorialActivity.class);games.add(SimilarQuizActivity.class);
         games.add(FinalScreenActivity.class);
     }
 

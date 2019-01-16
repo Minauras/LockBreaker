@@ -43,8 +43,8 @@ public class StepByStepActivity extends MiniGame {
             godzillaWalking = (AnimationDrawable) godzillaImageView.getBackground();
             godzillaWalking.stop();
             godzillaImageView.setX(dpWidth-(step)*step_size);
-            score += 14;
             if(dpWidth-(step)*step_size <= 100){
+                score += 300;
                 initializeNextGame();
                 finish();
             }
@@ -59,7 +59,7 @@ public class StepByStepActivity extends MiniGame {
             godzillaImageView.setX(dpWidth-(step)*step_size);
             godzillaImageView.setBackgroundResource(R.drawable.animation_godzilla_walking);
             godzillaWalking = (AnimationDrawable) godzillaImageView.getBackground();
-            score = -50;
+            score += -50;
         }
     };
 
@@ -81,18 +81,6 @@ public class StepByStepActivity extends MiniGame {
         time = findViewById(R.id.timeView);
 
         receiveLastGameData();
-        Log.d("DIFFICULTY", String.valueOf(difficulty));
-        switch (difficulty){
-            case 0:
-                //easy
-                break;
-            case 1:
-                // medium
-                break;
-            case 2:
-                // hard
-                break;
-        }
         startWatchActivity();
         score = 0;
 
@@ -100,8 +88,21 @@ public class StepByStepActivity extends MiniGame {
         dpHeight = displayMetrics.heightPixels / displayMetrics.density;
         dpWidth = displayMetrics.widthPixels / displayMetrics.density;
 
-        step_size = (int)(dpHeight/30);
-
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                step_size = (int)(dpHeight/40);
+                break;
+            case 1:
+                // medium
+                step_size = (int)(dpHeight/30);
+                break;
+            case 2:
+                // hard
+                step_size = (int)(dpHeight/20);
+                break;
+        }
         japanImageView = findViewById(R.id.japanImageView);
         japanImageView.setX(25);
         japanImageView.setY((int)(dpHeight/3));
