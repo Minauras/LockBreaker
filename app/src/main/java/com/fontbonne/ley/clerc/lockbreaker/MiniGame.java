@@ -40,6 +40,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
                 setMin_cur(min);
                 setSec_cur(sec);
                 Log.e("PAT_LOG", "Timer Status: min: " + min + " sec: " + sec);
+                callbackTimer();
             }
             else{
                 Log.e("PAT_LOG", "ERROR receiver not correct values transmitted");
@@ -51,12 +52,37 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.e("PAT_LOG", "TIME IS UP");
+            updateScore();
+            Constructor<?>[] nextGameConstructor = null;
+            Object nextGameObj = null;
+            Method nextGameMethod = null;
+            gameLost = 1;
+            Log.e("TAG_PAT", "totalScore" + totalScore);
+            try {
+                nextGameConstructor = FinalScreenActivity.class.getConstructors();
+                nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore, difficulty, gameLost});
+                nextGameMethod = nextGameObj.getClass().getMethod("startGame", Context.class);
+                nextGameMethod.invoke(nextGameObj, getApplicationContext());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                Log.e("ERROR InitGame", "IllegalAccessException");
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                Log.e("ERROR InitGame", "InstantiationException");
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+                Log.e("ERROR InitGame", "InvocationTargetException");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                Log.e("ERROR InitGame", "NoSuchMethodException");
+            }
         }
     };
 
-    // General Score -------------------------------------------------------------------------------
+    // General Class -------------------------------------------------------------------------------
     protected List<Class> games;
     protected Class nextGame;
+    protected int gameLost;
 
     // General Score -------------------------------------------------------------------------------
     protected int totalScore;
@@ -70,12 +96,13 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
     protected int sec_cur;
 
     // Constructor ---------------------------------------------------------------------------------
-    public MiniGame(List<Class> gameList, int TotScore, int difficulty) {
+    public MiniGame(List<Class> gameList, int TotScore, int difficulty, int gameStatus) {
         games = gameList;
         nextGame = null;
         totalScore = TotScore;
         score = 0;
         this.difficulty = difficulty;
+        gameLost = gameStatus;
     }
 
     public MiniGame(){
@@ -84,6 +111,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         totalScore = 0;
         score = 0;
         difficulty = 1;
+        gameLost = 0;
     }
 
     protected MiniGame copy(){
@@ -91,6 +119,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         copied.games = games;
         copied.totalScore = totalScore;
         copied.difficulty = difficulty;
+        copied.gameLost = gameLost;
         return copied;
     }
 
@@ -106,7 +135,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         try {
 
             nextGameConstructor = nextGame.getConstructors();
-            nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore, difficulty });
+            nextGameObj = nextGameConstructor[1].newInstance(new Object[] { games, totalScore, difficulty, gameLost });
             nextGameMethod = nextGameObj.getClass().getMethod("startGame", Context.class);
             nextGameMethod.invoke(nextGameObj, getApplicationContext());
         } catch (IllegalAccessException e) {
@@ -168,6 +197,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         games = game.games;
         totalScore = game.totalScore;
         difficulty = game.difficulty;
+        gameLost = game.gameLost;
 
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateTimerReceiver, new IntentFilter(UPDATETIMER));
@@ -185,7 +215,7 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         out.writeList(games);
         out.writeInt(totalScore);
         out.writeInt(difficulty);
-
+        out.writeInt(gameLost);
     }
 
     public static final Parcelable.Creator<MiniGame> CREATOR
@@ -205,8 +235,12 @@ public class MiniGame extends AppCompatActivity implements Parcelable{
         games = temp;
         totalScore = in.readInt();
         difficulty = in.readInt();
+        gameLost = in.readInt();
 
     }
+
+    // to be overwritten
+    public void callbackTimer(){}
 
     // Getter and Setters --------------------------------------------------------------------------
     protected List<Class> getGames(){return games;}

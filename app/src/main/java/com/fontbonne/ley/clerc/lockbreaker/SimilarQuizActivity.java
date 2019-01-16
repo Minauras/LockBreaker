@@ -28,8 +28,8 @@ import java.util.Set;
 
 public class SimilarQuizActivity extends MiniGame {
 
-    public SimilarQuizActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public SimilarQuizActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public SimilarQuizActivity(){

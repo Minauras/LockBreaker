@@ -15,9 +15,12 @@ import java.util.List;
 
 public class TutorialActivity extends MiniGame {
 
+    private static final int minutes = 0;
+    private static final int seconds = 10;
+
     //constructors
-    public TutorialActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public TutorialActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public TutorialActivity() {
@@ -57,6 +60,10 @@ public class TutorialActivity extends MiniGame {
 
 
     public void startButtonCallback(View view) {
+        Intent intent = new Intent(getApplicationContext(), BackgroundTimerService.class);
+        intent.putExtra(MiniGame.MIN, minutes);
+        intent.putExtra(MiniGame.SEC, seconds);
+        startService(intent);
         initializeNextGame();
         finish();
     }

@@ -24,8 +24,8 @@ public class MisleadingColorsActivity extends MiniGame {
     private static final List<COLOR> VALUES =
             Collections.unmodifiableList(Arrays.asList(COLOR.values()));
 
-    public MisleadingColorsActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public MisleadingColorsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public MisleadingColorsActivity() {
         super();

@@ -21,8 +21,8 @@ public class MazeControlsActivity extends MiniGame {
     MazeView maze;
 
     //constructors
-    public MazeControlsActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public MazeControlsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public MazeControlsActivity() {

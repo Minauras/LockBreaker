@@ -63,8 +63,8 @@ public class StepByStepActivity extends MiniGame {
     public static final String STEPCOUNT = "STEPCOUNT";
     public static final String STEPINTENTMOBILE = "STEPINTENTMOBILE";
 
-    public StepByStepActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public StepByStepActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public StepByStepActivity() {
         super();

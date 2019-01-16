@@ -94,8 +94,8 @@ public class PerilousJourneyActivity extends MiniGame {
 
 
 
-    public PerilousJourneyActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public PerilousJourneyActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public PerilousJourneyActivity() {
         super();

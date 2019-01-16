@@ -21,16 +21,14 @@ public class StartGameActivity extends MiniGame {
     private Button mStatButton;
 
     private static final int GET_DIFFICULTY = 1;
-    private static final int minutes = 1;
-    private static final int seconds = 0;
 
 
-    public static int NBRMINIGAMES = 10;
-    private int nbrGames = 1;
+    public static int NBRMINIGAMES = 9;
+    private int nbrGames = 9;
 
 
-    public StartGameActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public StartGameActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public StartGameActivity() {
@@ -62,10 +60,6 @@ public class StartGameActivity extends MiniGame {
             @Override
             public void onClick(View view) {
                 setupGame();
-                Intent intent = new Intent(getApplicationContext(), BackgroundTimerService.class);
-                intent.putExtra(MiniGame.MIN, minutes);
-                intent.putExtra(MiniGame.SEC, seconds);
-                startService(intent);
                 initializeNextGame();
             }
         });
@@ -108,7 +102,7 @@ public class StartGameActivity extends MiniGame {
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
         games.add(MisleadingColorsActivity.class);
-        games.add(SpaceWordActivity.class);
+        //games.add(SpaceWordActivity.class);
         games.add(PerilousJourneyActivity.class);
         games.add(StepByStepActivity.class);
         games.add(SymbolsActivity.class);

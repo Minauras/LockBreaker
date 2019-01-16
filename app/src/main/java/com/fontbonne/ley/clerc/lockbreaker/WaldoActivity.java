@@ -26,8 +26,8 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     ArrayList<ArrayList<Float>> touchSurfaces;
     int waldoIdx;
 
-    public WaldoActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public WaldoActivity(List<Class> gameActivity, int totscore, int difficulty , int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public WaldoActivity() {

@@ -31,8 +31,8 @@ public class EncryptedActivity extends MiniGame {
 
 
     //constructors
-    public EncryptedActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public EncryptedActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public EncryptedActivity() {

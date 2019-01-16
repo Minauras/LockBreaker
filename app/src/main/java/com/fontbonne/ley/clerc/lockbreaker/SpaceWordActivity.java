@@ -19,8 +19,8 @@ import java.util.Random;
 
 public class SpaceWordActivity extends MiniGame {
 
-    public SpaceWordActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public SpaceWordActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public SpaceWordActivity() {
         super();

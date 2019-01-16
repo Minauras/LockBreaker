@@ -15,8 +15,8 @@ public class InvisibleMazeActivity extends MiniGame {
 
 
     //constructors
-    public InvisibleMazeActivity(List<Class> gameActivity, int totscore, int difficulty) {
-        super(gameActivity, totscore, difficulty);
+    public InvisibleMazeActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public InvisibleMazeActivity() {
