@@ -47,12 +47,15 @@ public class MazeControlsActivity extends MiniGame {
         switch (difficulty){
             case 0:
                 //easy
+                score = 100;
                 break;
             case 1:
                 // medium
+                score = 200;
                 break;
             case 2:
                 // hard
+                score = 300;
                 break;
         }
 

@@ -17,8 +17,8 @@ public class MazeView extends View {
 
     private Cell[][] cells;
     private Cell player, exit;
-    private static final int COLS = 7;
-    private static final int ROWS = 7;
+    private int COLS = 7;
+    private int ROWS = 7;
 
     private float cellSize, hMargin, vMargin;
     private static final float WALL_THICKNESS = 4;

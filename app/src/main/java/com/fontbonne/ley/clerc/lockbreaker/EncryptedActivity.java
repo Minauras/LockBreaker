@@ -4,18 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +26,8 @@ public class EncryptedActivity extends MiniGame {
     private ArrayList<Character> letters = new ArrayList<>();
 
     private TextView time;
+
+    private int current_score = 300;
 
     //constructors
     public EncryptedActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
@@ -50,8 +46,8 @@ public class EncryptedActivity extends MiniGame {
 
         //receive last game data
         receiveLastGameData();
-        Log.d("DIFFICULTY", String.valueOf(difficulty));
-        switch (difficulty){
+
+        switch (difficulty) {
             case 0:
                 //easy
                 break;
@@ -131,7 +127,7 @@ public class EncryptedActivity extends MiniGame {
 
 
     private String chooseWord() {
-        Word chosenWord = new Word();
+        Word chosenWord = new Word(difficulty);
         String word = chosenWord.word;
         int number_symbols = word.length();
 
@@ -189,6 +185,7 @@ public class EncryptedActivity extends MiniGame {
 
             if (solution_symbol.isEmpty()) {
                 //game is won
+                score = current_score;
                 initializeNextGame();
                 finish();
             }
@@ -196,6 +193,11 @@ public class EncryptedActivity extends MiniGame {
             //if answer is false, turn button red
             button.setBackgroundColor(Color.RED);
             button.setEnabled(false);
+
+            //decrease score
+            current_score -= 75;
+
+            //restart
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -211,9 +213,9 @@ public class EncryptedActivity extends MiniGame {
     private class Word {
         String word;
 
-        public Word(){
+        public Word(int difficulty) {
             Random rand = new Random();
-            String json = loadJSONFromAsset(EncryptedActivity.this);
+            String json = loadJSONFromAsset(EncryptedActivity.this, difficulty);
             try {
                 JSONObject reader = new JSONObject(json);
                 int randCeiling = reader.getInt("nb");
@@ -223,16 +225,31 @@ public class EncryptedActivity extends MiniGame {
                 String idx = "w" + index;
 
                 this.word = reader.getString(idx);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 this.word = "JUSTICE";
             }
         }
 
-        private String loadJSONFromAsset(Context context) {
+        private String loadJSONFromAsset(Context context, int difficulty) {
             String json = null;
             try {
-                InputStream is = context.getAssets().open("encrypted.json");
+                InputStream is;
+                switch (difficulty) {
+                    case 0:
+                        //easy
+                        is = context.getAssets().open("encrypted_easy.json");
+                        break;
+                    case 1:
+                        // medium
+                        is = context.getAssets().open("encrypted_medium.json");
+                        break;
+                    case 2:
+                        // hard
+                        is = context.getAssets().open("encrypted_hard.json");
+                        break;
+                    default:
+                        is = context.getAssets().open("encrypted_medium.json");
+                }
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);
@@ -248,9 +265,9 @@ public class EncryptedActivity extends MiniGame {
     }
 
     @Override
-    public void callbackTimer(){
-        if(time != null){
-            if(min_cur == 0) time.setTextColor(Color.RED);
+    public void callbackTimer() {
+        if (time != null) {
+            if (min_cur == 0) time.setTextColor(Color.RED);
             time.setText(Integer.toString(min_cur) + ":" + Integer.toString(sec_cur));
         }
     }
