@@ -24,8 +24,8 @@ public class MisleadingColorsActivity extends MiniGame {
     private static final List<COLOR> VALUES =
             Collections.unmodifiableList(Arrays.asList(COLOR.values()));
 
-    public MisleadingColorsActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public MisleadingColorsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public MisleadingColorsActivity() {
         super();
@@ -56,6 +56,18 @@ public class MisleadingColorsActivity extends MiniGame {
         setContentView(R.layout.activity_misleading_colors);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         nbrGamesPlayed = 0;
 

@@ -47,14 +47,14 @@ public class UserProfile implements Serializable {
 
     }
 
-    public UserProfile(String email, String username, String password) {
+    public UserProfile(String email, String username, String password, String country) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.uID = "";
         this.maxScore = new Integer(0);
         this.order = new Integer(0);
-        this.country = "Suisse";
+        this.country = country;
 
     }
 

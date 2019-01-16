@@ -35,7 +35,8 @@ public class FinalScreenActivity extends MiniGame {
     private Button mPlayAgainButton;
 
 
-    public FinalScreenActivity(List<Class> gameActivity, int totscore) { super(gameActivity, totscore); }
+    public FinalScreenActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus); }
 
     public FinalScreenActivity(){ super(); }
 
@@ -54,19 +55,35 @@ public class FinalScreenActivity extends MiniGame {
         mPlayAgainButton = (Button) findViewById(R.id.playAgainButton);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         String message;
         //totalScore = 19;
 
-        Log.e("NICOLAS", "HEY Here " + totalScore);
+        Log.e("NICOLAS", String.valueOf(gameLost));
 
 
-        if (totalScore > 50){
-            message = "You're good !";
-        } else if (totalScore > 10){
-            message = "Nice Work you two";
-        } else {
-            message = "You really need to learn to communicate :/";
+        if(gameLost == 1){
+            message = "You Lost! :(";
+        }else {
+            if (totalScore > 50) {
+                message = "You're good !";
+            } else if (totalScore > 10) {
+                message = "Nice Work you two";
+            } else {
+                message = "You really need to learn to communicate :/";
+            }
         }
         UserProfile user = new UserProfile();
         boolean best = user.updateScore(totalScore);

@@ -2,6 +2,7 @@ package com.fontbonne.ley.clerc.lockbreaker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,8 +15,8 @@ public class InvisibleMazeActivity extends MiniGame {
 
 
     //constructors
-    public InvisibleMazeActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public InvisibleMazeActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public InvisibleMazeActivity() {
@@ -29,6 +30,18 @@ public class InvisibleMazeActivity extends MiniGame {
         setContentView(R.layout.activity_invisible_maze);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         maze = findViewById(R.id.maze);
         maze.setDirected(false);

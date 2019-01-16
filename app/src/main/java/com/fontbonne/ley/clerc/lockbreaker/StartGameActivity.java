@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +20,15 @@ public class StartGameActivity extends MiniGame {
     private Button mOptionButton;
     private Button mStatButton;
 
-    private static int NBRMINIGAMES = 1;
-    private int nbrGames = 1;
+    private static final int GET_DIFFICULTY = 1;
 
 
-    public StartGameActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public static int NBRMINIGAMES = 9;
+    private int nbrGames = 9;
+
+
+    public StartGameActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public StartGameActivity() {
@@ -51,11 +55,11 @@ public class StartGameActivity extends MiniGame {
         mStatButton = findViewById(R.id.statButton);
 
 
-        setupGame();
 
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setupGame();
                 initializeNextGame();
             }
         });
@@ -63,16 +67,19 @@ public class StartGameActivity extends MiniGame {
         mOptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent statIntent = new Intent(StartGameActivity.this, OptionActivity.class);
-                startActivity(statIntent);
+                Intent optionIntent = new Intent(StartGameActivity.this, OptionActivity.class);
+                optionIntent.putExtra(OptionActivity.DIFFICULTY_TAG, difficulty);
+                optionIntent.putExtra(OptionActivity.NUMBER_TAG, nbrGames);
+
+                startActivityForResult(optionIntent, GET_DIFFICULTY);
             }
         });
 
         mStatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent optionIntent = new Intent(StartGameActivity.this, StatActivity.class);
-                startActivity(optionIntent);
+                Intent statIntent = new Intent(StartGameActivity.this, StatActivity.class);
+                startActivity(statIntent);
             }
         });
 
@@ -95,7 +102,7 @@ public class StartGameActivity extends MiniGame {
         games.add(WaldoActivity.class);
         games.add(SimilarQuizActivity.class);
         games.add(MisleadingColorsActivity.class);
-        games.add(SpaceWordActivity.class);
+        //games.add(SpaceWordActivity.class);
         games.add(PerilousJourneyActivity.class);
         games.add(StepByStepActivity.class);
         games.add(SymbolsActivity.class);
@@ -121,5 +128,20 @@ public class StartGameActivity extends MiniGame {
         intent.setAction(WearService.ACTION_SEND.STARTACTIVITY.name());
         intent.putExtra(WearService.ACTIVITY_TO_START, BuildConfig.W_mainactivity);
         startService(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.d("DEBUGNICO","HEY2");
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_DIFFICULTY && resultCode == RESULT_OK && data != null) {
+            difficulty = (int) data.getIntExtra(OptionActivity.DIFFICULTY_TAG,1);
+            nbrGames = (int) data.getIntExtra(OptionActivity.NUMBER_TAG,1);
+
+            Log.d("DEBUGNICO1",String.valueOf(difficulty));
+            Log.d("DEBUGNICO2",String.valueOf(nbrGames));
+
+
+        }
     }
 }

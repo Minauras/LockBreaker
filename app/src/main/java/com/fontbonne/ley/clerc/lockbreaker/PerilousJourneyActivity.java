@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -93,8 +94,8 @@ public class PerilousJourneyActivity extends MiniGame {
 
 
 
-    public PerilousJourneyActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public PerilousJourneyActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public PerilousJourneyActivity() {
         super();
@@ -111,6 +112,18 @@ public class PerilousJourneyActivity extends MiniGame {
         dragon_fly_by = false;
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         maxText = findViewById(R.id.distanceGoalTextView);
         maxText.setText(String.valueOf(Distance_to_run));

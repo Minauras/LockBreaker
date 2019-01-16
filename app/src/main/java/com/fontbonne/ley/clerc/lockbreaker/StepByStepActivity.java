@@ -63,8 +63,8 @@ public class StepByStepActivity extends MiniGame {
     public static final String STEPCOUNT = "STEPCOUNT";
     public static final String STEPINTENTMOBILE = "STEPINTENTMOBILE";
 
-    public StepByStepActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public StepByStepActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
     public StepByStepActivity() {
         super();
@@ -76,6 +76,18 @@ public class StepByStepActivity extends MiniGame {
         setContentView(R.layout.activity_step_by_step);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
         startWatchActivity();
         score = 0;
 

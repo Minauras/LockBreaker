@@ -21,8 +21,8 @@ public class MazeControlsActivity extends MiniGame {
     MazeView maze;
 
     //constructors
-    public MazeControlsActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public MazeControlsActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public MazeControlsActivity() {
@@ -36,6 +36,18 @@ public class MazeControlsActivity extends MiniGame {
         setContentView(R.layout.activity_maze_controls);
 
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         maze = findViewById(R.id.maze);
         maze.setDirected(true);

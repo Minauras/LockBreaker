@@ -28,8 +28,8 @@ import java.util.Set;
 
 public class SimilarQuizActivity extends MiniGame {
 
-    public SimilarQuizActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public SimilarQuizActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public SimilarQuizActivity(){
@@ -37,7 +37,7 @@ public class SimilarQuizActivity extends MiniGame {
     }
 
 
-    private final int NB_QUESTIONS = 3;
+    private int NB_QUESTIONS = 3;
     private Question[] questions;
     private List<Integer> questionID;
     private int currentQuestion;
@@ -56,8 +56,19 @@ public class SimilarQuizActivity extends MiniGame {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_similar_quiz);
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                NB_QUESTIONS = 2;
+                break;
+            case 1:
+                NB_QUESTIONS = 3;
+                break;
+            case 2:
+                NB_QUESTIONS = 5;
+                break;
+        }
 
-        Log.e("WALDO", "onCreate");
 
         questionTextView  = findViewById(R.id.questionTextView);
         answer0 = findViewById(R.id.answer0);
@@ -73,7 +84,6 @@ public class SimilarQuizActivity extends MiniGame {
 
         String json =  loadJSONFromAsset(this);
 
-        Log.e("WALDO", "before JSON");
 
         try {
             JSONObject obj = new JSONObject(json);
@@ -89,20 +99,12 @@ public class SimilarQuizActivity extends MiniGame {
             }
             questionID = new ArrayList<>();
             questionID.addAll(generated);
-            Log.d("AZERTY", questionID.toString());
 
             for (int i = 0; i < NB_QUESTIONS; i++){
                 questions[i] = new Question(questionID.get(i), obj);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        Log.e("WALDO", "after JSON");
-
-
-        for (int i = 0; i < NB_QUESTIONS; i++){
-
-            Log.d("AZERTY", questions[i].getQuestion());
         }
 
         currentQuestion = 0;
@@ -115,17 +117,13 @@ public class SimilarQuizActivity extends MiniGame {
 
             Log.d("AZERTY", questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
             startWatchActivity(questions[questionId].getAnswer(questions[currentQuestion].getThruth()));
-            Log.d("AZERTY", "startWatchActivity");
 
             questionTextView.setText(questions[questionId].getQuestion());
-            Log.d("AZERTY", "questionTextView");
 
             answer0.setText(questions[questionId].getAnswer(0));
             answer1.setText(questions[questionId].getAnswer(1));
             answer2.setText(questions[questionId].getAnswer(2));
             answer3.setText(questions[questionId].getAnswer(3));
-            Log.d("AZERTY", "answer3");
-
         }
         else{
             initializeNextGame();
@@ -154,7 +152,6 @@ public class SimilarQuizActivity extends MiniGame {
         }
         if (solFound == questions[currentQuestion].getThruth()){
             Toast.makeText(this,"NICE", Toast.LENGTH_LONG).show();
-
             currentQuestion += 1;
             updateLayout(currentQuestion);
         }else{

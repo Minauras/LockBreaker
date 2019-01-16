@@ -26,8 +26,8 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     ArrayList<ArrayList<Float>> touchSurfaces;
     int waldoIdx;
 
-    public WaldoActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public WaldoActivity(List<Class> gameActivity, int totscore, int difficulty , int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public WaldoActivity() {
@@ -38,8 +38,19 @@ public class WaldoActivity extends MiniGame implements View.OnTouchListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waldo);
-        receiveLastGameData();
 
+        receiveLastGameData();
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();

@@ -31,8 +31,8 @@ public class EncryptedActivity extends MiniGame {
 
 
     //constructors
-    public EncryptedActivity(List<Class> gameActivity, int totscore) {
-        super(gameActivity, totscore);
+    public EncryptedActivity(List<Class> gameActivity, int totscore, int difficulty, int gameStatus) {
+        super(gameActivity, totscore, difficulty, gameStatus);
     }
 
     public EncryptedActivity() {
@@ -46,6 +46,18 @@ public class EncryptedActivity extends MiniGame {
 
         //receive last game data
         receiveLastGameData();
+        Log.d("DIFFICULTY", String.valueOf(difficulty));
+        switch (difficulty){
+            case 0:
+                //easy
+                break;
+            case 1:
+                // medium
+                break;
+            case 2:
+                // hard
+                break;
+        }
 
         setupGame();
     }

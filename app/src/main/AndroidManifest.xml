@@ -78,6 +78,7 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+        <service android:name=".BackgroundTimerService"></service>
 
         <activity
             android:name=".SpaceWordActivity"
