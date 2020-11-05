@@ -7,4 +7,4 @@ One player has a tablet and another has a smartwatch. Both should communicate to
 ## Authors
 - [Nicolas Fontbonne](https://github.com/nicolasFontbonne)
 - [Patrick Ley](https://github.com/okhofsk)
-- [Rémi Clerc](ghttps://github.com/Minauras)
+- [Rémi Clerc](https://github.com/Minauras)
